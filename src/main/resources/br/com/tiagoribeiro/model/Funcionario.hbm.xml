@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="br.com.tiagoribeiro.model.Funcionario" table="FUNCIONARIO">
+
+        <id name="id" column="ID">
+            <generator class="native"/>
+        </id>
+
+        <property name="nome" column="NOME" type="string" not-null="true" length="100"/>
+        <property name="cargo" column="CARGO" type="string" not-null="true" length="100"/>
+        <property name="salario" column="SALARIO" type="big_decimal" not-null="true"/>
+
+    </class>
+</hibernate-mapping>
