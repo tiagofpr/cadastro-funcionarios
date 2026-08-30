@@ -9,7 +9,15 @@ import java.util.List;
 
 public class FuncionarioService {
 
-    private final FuncionarioDAO dao = new FuncionarioDAOImpl();
+    private final FuncionarioDAO dao;
+
+    public FuncionarioService(){
+        this.dao = new FuncionarioDAOImpl();
+    }
+
+    public FuncionarioService(FuncionarioDAO dao){
+        this.dao= dao;
+    }
 
     public void cadastrar(Funcionario funcionario){
         validar(funcionario);

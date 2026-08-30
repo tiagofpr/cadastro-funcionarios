@@ -35,7 +35,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
     @Override
     public Funcionario buscarPorId(Long id) {
         try(Session session = HibernateUtil.getSessionFactory().openSession()){
-            logger.log(Level.INFO,"Realizando busca de funcionario no banco de dados. {}", id);
+            //logger.log(Level.INFO,"Realizando busca de funcionario no banco de dados. {}", id);
             return session.get(Funcionario.class, id);
         }
 
