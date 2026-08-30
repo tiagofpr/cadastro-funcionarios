@@ -29,4 +29,12 @@
         <servlet-name>DeletarFuncionarioServlet</servlet-name>
         <url-pattern>/funcionarios/deletar</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>EditarFuncionarioServlet</servlet-name>
+        <servlet-class>br.com.tiagoribeiro.controller.EditarFuncionarioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EditarFuncionarioServlet</servlet-name>
+        <url-pattern>/funcionarios/editar</url-pattern>
+    </servlet-mapping>
 </web-app>

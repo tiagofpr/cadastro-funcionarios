@@ -24,8 +24,9 @@
                 <td>${funcionario.cargo}</td>
                 <td>${funcionario.salario}</td>
                 <td>
+                    <a href="${pageContext.request.contextPath}/funcionarios/editar?id=${funcionario.id}">Editar</a>
                     <form method="post" action="${pageContext.request.contextPath}/funcionarios/deletar"
-                        onsubmit="return confirm('Tem certeza que deseja deletar este funcionário?');">
+                          onsubmit="return confirm('Tem certeza que deseja deletar este funcionário?');" style="display:inline;">
                         <input type="hidden" name="id" value="${funcionario.id}">
                         <button type="submit">Deletar</button>
                     </form>

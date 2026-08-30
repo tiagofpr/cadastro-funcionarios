@@ -24,7 +24,7 @@ public class ListarFuncionarioServlet extends HttpServlet {
 
         request.setAttribute("funcionarios", funcionarios);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/viwes/listar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/listar.jsp");
         dispatcher.forward(request, response);
     }
 

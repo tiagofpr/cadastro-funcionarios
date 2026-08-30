@@ -18,7 +18,7 @@ public class SalvarFuncionarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/viwes/cadastro.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/cadastro.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -54,7 +54,7 @@ public class SalvarFuncionarioServlet extends HttpServlet {
         throws ServletException, IOException{
 
         request.setAttribute("funcionario", funcionario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/viwes/cadastro.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/cadastro.jsp");
         dispatcher.forward(request, response);
 
     }
