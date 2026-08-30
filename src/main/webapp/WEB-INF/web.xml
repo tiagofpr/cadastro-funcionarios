@@ -13,4 +13,12 @@
         <servlet-name>ListarFuncionarioServlet</servlet-name>
         <url-pattern>/funcionarios</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>SalvarFuncionarioServlet</servlet-name>
+        <servlet-class>br.com.tiagoribeiro.controller.SalvarFuncionarioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SalvarFuncionarioServlet</servlet-name>
+        <url-pattern>/funcionarios/novo</url-pattern>
+    </servlet-mapping>
 </web-app>

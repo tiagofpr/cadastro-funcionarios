@@ -26,4 +26,5 @@
         </c:forEach>
     </table>
 </body>
+    <p><a href="${pageContext.request.contextPath}/funcionarios/novo">Cadastrar novo funcionário</a></p>
 </html>
