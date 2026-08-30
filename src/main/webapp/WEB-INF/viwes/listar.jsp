@@ -15,6 +15,7 @@
             <th>Nome</th>
             <th>Cargo</th>
             <th>Salário</th>
+            <th>Ações</th>
         </tr>
         <c:forEach var="funcionario" items="${funcionarios}">
             <tr>
@@ -22,6 +23,13 @@
                 <td>${funcionario.nome}</td>
                 <td>${funcionario.cargo}</td>
                 <td>${funcionario.salario}</td>
+                <td>
+                    <form method="post" action="${pageContext.request.contextPath}/funcionarios/deletar"
+                        onsubmit="return confirm('Tem certeza que deseja deletar este funcionário?');">
+                        <input type="hidden" name="id" value="${funcionario.id}">
+                        <button type="submit">Deletar</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
     </table>

@@ -21,4 +21,12 @@
         <servlet-name>SalvarFuncionarioServlet</servlet-name>
         <url-pattern>/funcionarios/novo</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>DeletarFuncionarioServlet</servlet-name>
+        <servlet-class>br.com.tiagoribeiro.controller.DeletarFuncionarioServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeletarFuncionarioServlet</servlet-name>
+        <url-pattern>/funcionarios/deletar</url-pattern>
+    </servlet-mapping>
 </web-app>
