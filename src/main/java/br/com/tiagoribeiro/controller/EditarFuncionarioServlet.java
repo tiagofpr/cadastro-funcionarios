@@ -35,17 +35,19 @@ public class EditarFuncionarioServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException{
 
-        Long id = Long.parseLong(request.getParameter("id"));
-
         Funcionario dadosNovos = new Funcionario();
         dadosNovos.setNome(request.getParameter("nome"));
         dadosNovos.setCargo(request.getParameter("cargo"));
 
+        Long id = null;
+
         try{
+            id = Long.parseLong(request.getParameter("id"));
             dadosNovos.setSalario(new BigDecimal(request.getParameter("salario")));
             service.atualizar(id, dadosNovos);
 
-            response.sendRedirect(request.getContextPath() + "/funcionarios");
+            response.sendRedirect(request.getContextPath() + "/funcionarios?sucesso=atualizado");
+
         }catch (NumberFormatException e){
             reexibirFormulario(request, response, id, dadosNovos, "Salario inválido. Use apenas numeros (ex. 3500.00)");
         }catch (IllegalArgumentException e){
