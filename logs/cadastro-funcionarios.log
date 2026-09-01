@@ -1,0 +1,79 @@
+2026-08-31 20:26:04 [qtp1801709229-14] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-08-31 20:26:05 [qtp1801709229-14] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-08-31 20:26:05 [qtp1801709229-14] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-08-31 20:26:05 [qtp1801709229-14] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/javadb]
+2026-08-31 20:26:05 [qtp1801709229-14] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=tfpr, password=****}
+2026-08-31 20:26:05 [qtp1801709229-14] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-08-31 20:26:05 [qtp1801709229-14] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2026-08-31 20:26:05 [qtp1801709229-14] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2026-08-31 20:26:06 [qtp1801709229-14] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@1881332e] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-08-31 20:26:06 [qtp1801709229-14] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-08-31 20:26:11 [qtp1801709229-18] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 10
+2026-08-31 20:26:13 [qtp1801709229-18] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 10
+2026-08-31 20:26:13 [qtp1801709229-18] INFO  b.c.t.dao.FuncionarioDAOImpl - Iniciado a transasão para atualizar o Funcionario
+2026-08-31 20:26:13 [qtp1801709229-18] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario atualizado com sucesso 10 
+2026-08-31 20:29:02 [qtp1801709229-19] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 14
+2026-08-31 20:29:02 [qtp1801709229-19] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario deletado com sucesso.
+2026-08-31 20:34:38 [qtp1801709229-13] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 13
+2026-08-31 20:34:40 [qtp1801709229-13] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 13
+2026-08-31 20:34:40 [qtp1801709229-13] INFO  b.c.t.dao.FuncionarioDAOImpl - Iniciado a transasão para atualizar o Funcionario
+2026-08-31 20:34:40 [qtp1801709229-13] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario atualizado com sucesso 13 
+2026-08-31 20:36:56 [qtp1801709229-19] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Lucas
+2026-08-31 20:36:56 [qtp1801709229-19] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 15 
+2026-08-31 20:36:57 [qtp1801709229-19] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 15
+2026-08-31 20:37:20 [qtp1801709229-20] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 15
+2026-08-31 20:37:31 [qtp1801709229-20] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 15
+2026-08-31 20:37:31 [qtp1801709229-20] INFO  b.c.t.dao.FuncionarioDAOImpl - Iniciado a transasão para atualizar o Funcionario
+2026-08-31 20:37:31 [qtp1801709229-20] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario atualizado com sucesso 15 
+2026-08-31 20:38:04 [qtp1801709229-16] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 13
+2026-08-31 20:38:04 [qtp1801709229-16] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario deletado com sucesso.
+2026-08-31 20:42:51 [qtp1801709229-16] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 10
+2026-08-31 20:42:53 [qtp1801709229-19] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 10
+2026-08-31 20:42:53 [qtp1801709229-19] INFO  b.c.t.dao.FuncionarioDAOImpl - Iniciado a transasão para atualizar o Funcionario
+2026-08-31 20:42:53 [qtp1801709229-19] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario atualizado com sucesso 10 
+2026-08-31 20:53:02 [qtp1095290435-18] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-08-31 20:53:03 [qtp1095290435-18] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-08-31 20:53:03 [qtp1095290435-18] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-08-31 20:53:03 [qtp1095290435-18] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/javadb]
+2026-08-31 20:53:03 [qtp1095290435-18] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=tfpr, password=****}
+2026-08-31 20:53:03 [qtp1095290435-18] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-08-31 20:53:03 [qtp1095290435-18] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2026-08-31 20:53:03 [qtp1095290435-18] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2026-08-31 20:53:04 [qtp1095290435-18] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4eb6ad41] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-08-31 20:53:04 [qtp1095290435-18] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-08-31 20:53:09 [qtp1095290435-14] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 15
+2026-08-31 20:53:10 [qtp1095290435-14] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 15
+2026-08-31 20:53:10 [qtp1095290435-14] INFO  b.c.t.dao.FuncionarioDAOImpl - Iniciado a transasão para atualizar o Funcionario
+2026-08-31 20:53:10 [qtp1095290435-14] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario atualizado com sucesso 15 
+2026-08-31 20:59:14 [qtp632627844-14] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-08-31 20:59:14 [qtp632627844-14] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-08-31 20:59:15 [qtp632627844-14] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-08-31 20:59:15 [qtp632627844-14] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/javadb]
+2026-08-31 20:59:15 [qtp632627844-14] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=tfpr, password=****}
+2026-08-31 20:59:15 [qtp632627844-14] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-08-31 20:59:15 [qtp632627844-14] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2026-08-31 20:59:15 [qtp632627844-14] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2026-08-31 20:59:15 [qtp632627844-14] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@47367f12] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-08-31 20:59:16 [qtp632627844-14] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-08-31 21:00:49 [qtp632627844-18] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-08-31 21:00:49 [qtp632627844-18] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-08-31 21:00:50 [qtp632627844-18] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-08-31 21:00:50 [qtp632627844-18] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/javadb]
+2026-08-31 21:00:50 [qtp632627844-18] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=tfpr, password=****}
+2026-08-31 21:00:50 [qtp632627844-18] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-08-31 21:00:50 [qtp632627844-18] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2026-08-31 21:00:50 [qtp632627844-18] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2026-08-31 21:00:50 [qtp632627844-18] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@6f15c096] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-08-31 21:00:50 [qtp632627844-18] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-08-31 21:01:39 [qtp632627844-20] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Paulo
+2026-08-31 21:01:39 [qtp632627844-20] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 16 
+2026-08-31 21:01:39 [qtp632627844-20] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 16
+2026-08-31 21:02:14 [qtp632627844-20] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 10
+2026-08-31 21:02:14 [qtp632627844-20] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario deletado com sucesso.
+2026-08-31 21:02:24 [qtp632627844-14] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 15
+2026-08-31 21:02:24 [qtp632627844-14] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario deletado com sucesso.
+2026-08-31 21:02:27 [qtp632627844-14] INFO  b.c.t.dao.FuncionarioDAOImpl - Realizando busca de funcionario no banco de dados. 16
+2026-08-31 21:02:27 [qtp632627844-14] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario deletado com sucesso.
+2026-08-31 21:02:43 [qtp632627844-20] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Tiago
+2026-08-31 21:02:43 [qtp632627844-20] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 17 
+2026-08-31 21:02:43 [qtp632627844-20] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 17

@@ -37,7 +37,7 @@ public class SalvarFuncionarioServlet extends HttpServlet {
             funcionario.setSalario(new BigDecimal(salarioTexto));
             service.cadastrar(funcionario);
 
-            response.sendRedirect(request.getContextPath() + "/funcionarios");
+            response.sendRedirect(request.getContextPath() + "/funcionarios?sucesso=cadastrado");
 
         } catch (NumberFormatException e ){
             request.setAttribute("erro", "Salario invalido. Use apenas numero (ex: 3500.00).");

@@ -5,9 +5,22 @@
 <html>
 <head>
     <title>Funcionários cadastrados</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css">
 </head>
 <body>
     <h1>Funcionários cadastrados</h1>
+
+    <c:if test="${param.sucesso == 'cadastrado'}">
+        <p class="alerta alerta-sucesso">Funcionário cadastrado com sucesso!</p>
+    </c:if>
+    <c:if test="${param.sucesso == 'atualizado'}">
+        <p class="alerta alerta-sucesso">Funcionário atualizado com sucesso!</p>
+    </c:if>
+    <c:if test="${param.sucesso == 'deletado'}">
+        <p class="alerta alerta-sucesso">Funcionário removido com sucesso!</p>
+    </c:if>
+
+    <p><a href="${pageContext.request.contextPath}/funcionarios/novo">Cadastrar novo funcionário</a></p>
 
     <table border="1">
         <tr>
@@ -35,5 +48,4 @@
         </c:forEach>
     </table>
 </body>
-    <p><a href="${pageContext.request.contextPath}/funcionarios/novo">Cadastrar novo funcionário</a></p>
 </html>

@@ -24,6 +24,6 @@ public class DeletarFuncionarioServlet extends HttpServlet {
         }catch (IllegalArgumentException e){
             //Por enquanto não irei tratat esse erro.
         }
-        response.sendRedirect(request.getContextPath() + "/funcionarios");
+        response.sendRedirect(request.getContextPath() + "/funcionarios?sucesso=deletado");
     }
 }

@@ -3,11 +3,15 @@ package br.com.tiagoribeiro.service;
 import br.com.tiagoribeiro.dao.FuncionarioDAO;
 import br.com.tiagoribeiro.dao.FuncionarioDAOImpl;
 import br.com.tiagoribeiro.model.Funcionario;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class FuncionarioService {
+
+    private static final Logger logger = LoggerFactory.getLogger(FuncionarioService.class);
 
     private final FuncionarioDAO dao;
 
@@ -20,13 +24,16 @@ public class FuncionarioService {
     }
 
     public void cadastrar(Funcionario funcionario){
+        logger.info("Cadastando funcionrio: {}", funcionario.getNome());
         validar(funcionario);
         dao.salvar(funcionario);
+        logger.info("Funcionario cadastrado com id: {}", funcionario.getId());
     }
 
     public Funcionario buscarPorId(Long id){
         Funcionario funcionario = dao.buscarPorId(id);
         if(funcionario == null){
+            logger.warn("Tentativa de buscar funcioario inexistente, id: {}", id);
             throw new IllegalArgumentException("Funcionario com id: " + id + "não encontrado");
         }
         return funcionario;
@@ -55,12 +62,15 @@ public class FuncionarioService {
     //Metodos privado auxiliar
     private void validar(Funcionario funcionario){
         if(funcionario.getNome() == null || funcionario.getNome().trim().isEmpty()){
+            logger.warn("Validação falhou: nome vazio");
             throw new IllegalArgumentException("Nome do Funcionario é obrigatório.");
         }
         if(funcionario.getCargo() == null || funcionario.getCargo().trim().isEmpty()){
+            logger.warn("Validação falhou: cargo vazio");
             throw new IllegalArgumentException("Cargo do Funcionario é obrigatório.");
         }
         if(funcionario.getSalario() == null || funcionario.getSalario().compareTo(BigDecimal.ZERO) <= 0){
+            logger.warn("Validação falhou: Salatio deve ser maio que zero");
             throw new IllegalArgumentException("Salario deve ser maior que zero.");
         }
     }
