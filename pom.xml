@@ -100,7 +100,7 @@
                     <webApp>
                         <contextPath>/cadastro-funcionarios</contextPath>
                     </webApp>
-                    <scanIntervalSeconds>2</scanIntervalSeconds>
+                    <scanIntervalSeconds>0</scanIntervalSeconds>
                 </configuration>
             </plugin>
         </plugins>
