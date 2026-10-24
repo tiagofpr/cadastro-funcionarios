@@ -66,3 +66,6 @@
 2026-10-24 16:06:23 [qtp681514473-21] WARN  b.c.t.service.FuncionarioService - Validação falhou: nome vazio
 2026-10-24 16:06:55 [qtp681514473-22] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: 
 2026-10-24 16:06:55 [qtp681514473-22] WARN  b.c.t.service.FuncionarioService - Validação falhou: nome vazio
+2026-10-24 16:35:14 [qtp1305669460-22] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: 
+2026-10-24 16:35:14 [qtp1305669460-22] WARN  b.c.t.service.FuncionarioService - Validação falhou: nome vazio
+2026-10-24 16:35:15 [qtp1305669460-22] INFO  b.c.t.filter.RequestLoggingFilter - POST /cadastro-funcionarios/funcionarios/novo -> 200 (810 ms)
