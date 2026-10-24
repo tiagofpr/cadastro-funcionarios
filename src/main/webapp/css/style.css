@@ -54,3 +54,8 @@ button:hover { background: #1d4ed8; }
 }
 .alerta-sucesso { background: #dcfce7; color: #166534; }
 .alerta-erro { background: #fee2e2; color: #991b1b; }
+
+input:invalid:not(:placeholder-shown),
+input:invalid:focus {
+    border-color: #dc2626;
+}

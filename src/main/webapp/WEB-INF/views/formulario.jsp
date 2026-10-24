@@ -16,24 +16,30 @@
         <p class="alerta alerta-erro">${erro}</p>
     </c:if>
 
-    <form method="post"
-          action="${pageContext.request.contextPath}${editando ? '/funcionarios/editar' : '/funcionarios/novo'}">
+<form method="post"
+      action="${pageContext.request.contextPath}${editando ? '/funcionarios/editar' : '/funcionarios/novo'}"
+      onsubmit="this.querySelector('button[type=submit]').disabled = true;">
 
-        <c:if test="${editando}">
-            <input type="hidden" name="id" value="${funcionario.id}">
-        </c:if>
+    <c:if test="${editando}">
+        <input type="hidden" name="id" value="${funcionario.id}">
+    </c:if>
 
-        <label>Nome:</label>
-        <input type="text" name="nome" value="${funcionario.nome}">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" value="${funcionario.nome}"
+           required maxlength="100" pattern=".*\S.*"
+           title="Informe o nome (não pode ser só espaços)">
 
-        <label>Cargo:</label>
-        <input type="text" name="cargo" value="${funcionario.cargo}">
+    <label for="cargo">Cargo:</label>
+    <input type="text" id="cargo" name="cargo" value="${funcionario.cargo}"
+           required maxlength="100" pattern=".*\S.*"
+           title="Informe o cargo (não pode ser só espaços)">
 
-        <label>Salário:</label>
-        <input type="text" name="salario" value="${funcionario.salario}">
+    <label for="salario">Salário:</label>
+    <input type="number" id="salario" name="salario" value="${funcionario.salario}"
+           required min="0.01" step="0.01">
 
-        <button type="submit">${editando ? 'Salvar alterações' : 'Salvar'}</button>
-    </form>
+    <button type="submit">${editando ? 'Salvar alterações' : 'Salvar'}</button>
+</form>
 
     <p><a href="${pageContext.request.contextPath}/funcionarios">Voltar para a lista</a></p>
 </body>
