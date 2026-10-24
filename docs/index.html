@@ -4,10 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>cadastro-funcionarios: anotações</title>
+    <script>
+        /* aplica o tema antes de pintar, para não piscar */
+        (function () {
+          var t = 'auto';
+          try { t = localStorage.getItem('tema') || 'auto'; } catch (e) {}
+          if (t === 'auto') {
+            t = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+          document.documentElement.setAttribute('data-tema', t);
+        })();
+    </script>
     <style>
-        :root { --fg:#222; --muted:#666; --line:#d9d9d9; --code:#f5f5f5; --link:#1a5fb4; }
+        :root { --bg:#fff; --fg:#222; --muted:#666; --line:#d9d9d9; --line2:#bbb; --code:#f5f5f5;
+                --head:#ececec; --nota:#fafafa; --link:#1a5fb4; color-scheme:light; }
+        :root[data-tema="dark"] { --bg:#16181c; --fg:#dcdde0; --muted:#9a9ea6; --line:#2f333a; --line2:#454a53;
+                --code:#1f2227; --head:#262a30; --nota:#1b1e23; --link:#7db3f0; color-scheme:dark; }
         * { box-sizing: border-box; }
-        body { margin:0; color:var(--fg); background:#fff;
+        body { margin:0; color:var(--fg); background:var(--bg);
                font:16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif; }
         a { color:var(--link); }
 
@@ -16,7 +30,11 @@
         nav { position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
               padding:24px 16px 24px 20px; border-right:1px solid var(--line); font-size:14px; }
         nav .nome { font-weight:600; margin:0 0 12px; }
-        nav input { width:100%; padding:6px 8px; border:1px solid #bbb; border-radius:3px; font:inherit; margin-bottom:12px; }
+        nav input { width:100%; padding:6px 8px; border:1px solid var(--line2); border-radius:3px; font:inherit;
+                    margin-bottom:12px; background:var(--bg); color:var(--fg); }
+        .tema { display:flex; gap:12px; align-items:center; margin:0 0 12px; font-size:13px; color:var(--muted); }
+        .tema select { font:inherit; padding:3px 6px; border:1px solid var(--line2); border-radius:3px;
+                       background:var(--bg); color:var(--fg); }
         nav ul { list-style:none; margin:0; padding:0; }
         nav a { display:block; padding:3px 0; color:var(--fg); text-decoration:none; }
         nav a:hover { color:var(--link); text-decoration:underline; }
@@ -34,7 +52,7 @@
                background:var(--code); padding:1px 4px; border-radius:2px; }
 
         .bloco { border:1px solid var(--line); margin:14px 0 18px; }
-        .arq { display:flex; justify-content:space-between; align-items:center; background:#ececec;
+        .arq { display:flex; justify-content:space-between; align-items:center; background:var(--head);
                border-bottom:1px solid var(--line); padding:3px 10px; font-size:12px; color:var(--muted);
                font-family:ui-monospace, "Ubuntu Mono", Menlo, Consolas, monospace; }
         .copiar { font:inherit; font-family:system-ui, sans-serif; background:none; border:0; color:var(--link); cursor:pointer; padding:0; }
@@ -43,9 +61,9 @@
 
         table { border-collapse:collapse; margin:14px 0 18px; font-size:15px; width:100%; max-width:860px; }
         th, td { text-align:left; vertical-align:top; padding:6px 10px; border-bottom:1px solid var(--line); }
-        th { border-bottom:2px solid #bbb; font-weight:600; }
+        th { border-bottom:2px solid var(--line2); font-weight:600; }
 
-        .nota { border:1px solid var(--line); background:#fafafa; padding:8px 14px; margin:14px 0; max-width:70ch; font-size:15px; }
+        .nota { border:1px solid var(--line); background:var(--nota); padding:8px 14px; margin:14px 0; max-width:70ch; font-size:15px; }
         .nota p { margin:4px 0; }
 
         footer { margin-top:48px; color:var(--muted); font-size:14px; }
@@ -66,6 +84,13 @@
 
     <nav>
         <p class="nome">cadastro-funcionarios</p>
+        <label class="tema">Tema
+            <select id="tema" aria-label="Tema">
+                <option value="auto">Automático</option>
+                <option value="light">Claro</option>
+                <option value="dark">Escuro</option>
+            </select>
+        </label>
         <input type="search" id="busca" placeholder="Filtrar seções" aria-label="Filtrar seções">
         <ul>
             <li><a href="#visao-geral">Visão geral</a></li>
@@ -1022,6 +1047,30 @@ cp target/cadastro-funcionarios.war /caminho/do/tomcat/webapps/
 </div>
 
 <script>
+    (function () {
+      var sel = document.getElementById('tema');
+      var raiz = document.documentElement;
+      var escuro = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
+
+      function aplicar(escolha) {
+        var tema = escolha === 'auto' ? (escuro && escuro.matches ? 'dark' : 'light') : escolha;
+        raiz.setAttribute('data-tema', tema);
+      }
+
+      var salvo = 'auto';
+      try { salvo = localStorage.getItem('tema') || 'auto'; } catch (e) {}
+      sel.value = salvo;
+      aplicar(salvo);
+
+      sel.addEventListener('change', function () {
+        try { localStorage.setItem('tema', sel.value); } catch (e) {}
+        aplicar(sel.value);
+      });
+      if (escuro && escuro.addEventListener) {
+        escuro.addEventListener('change', function () { if (sel.value === 'auto') aplicar('auto'); });
+      }
+    })();
+
     document.querySelectorAll('.bloco').forEach(function (bloco) {
       var botao = bloco.querySelector('.copiar');
       botao.addEventListener('click', function () {
