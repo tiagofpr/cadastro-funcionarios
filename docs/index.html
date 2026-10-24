@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>cadastro-funcionarios: anotações</title>
+    <style>
+        :root { --fg:#222; --muted:#666; --line:#d9d9d9; --code:#f5f5f5; --link:#1a5fb4; }
+        * { box-sizing: border-box; }
+        body { margin:0; color:var(--fg); background:#fff;
+               font:16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, Ubuntu, sans-serif; }
+        a { color:var(--link); }
+
+        .wrap { display:grid; grid-template-columns:250px minmax(0,1fr); max-width:1080px; margin:0 auto; }
+
+        nav { position:sticky; top:0; align-self:start; height:100vh; overflow:auto;
+              padding:24px 16px 24px 20px; border-right:1px solid var(--line); font-size:14px; }
+        nav .nome { font-weight:600; margin:0 0 12px; }
+        nav input { width:100%; padding:6px 8px; border:1px solid #bbb; border-radius:3px; font:inherit; margin-bottom:12px; }
+        nav ul { list-style:none; margin:0; padding:0; }
+        nav a { display:block; padding:3px 0; color:var(--fg); text-decoration:none; }
+        nav a:hover { color:var(--link); text-decoration:underline; }
+
+        main { padding:28px 40px 80px; min-width:0; }
+        h1 { font-size:28px; margin:0 0 6px; }
+        .sub { color:var(--muted); margin:0 0 8px; }
+        section { padding:28px 0 4px; border-top:1px solid var(--line); margin-top:28px; }
+        h2 { font-size:22px; margin:0 0 12px; }
+        h3 { font-size:17px; margin:24px 0 6px; }
+        p, ul, ol { max-width:70ch; }
+        li { margin:3px 0; }
+
+        code { font-family:ui-monospace, "Ubuntu Mono", Menlo, Consolas, monospace; font-size:.9em;
+               background:var(--code); padding:1px 4px; border-radius:2px; }
+
+        .bloco { border:1px solid var(--line); margin:14px 0 18px; }
+        .arq { display:flex; justify-content:space-between; align-items:center; background:#ececec;
+               border-bottom:1px solid var(--line); padding:3px 10px; font-size:12px; color:var(--muted);
+               font-family:ui-monospace, "Ubuntu Mono", Menlo, Consolas, monospace; }
+        .copiar { font:inherit; font-family:system-ui, sans-serif; background:none; border:0; color:var(--link); cursor:pointer; padding:0; }
+        .bloco pre { margin:0; padding:12px 14px; overflow:auto; background:var(--code); line-height:1.5; }
+        .bloco pre code { background:none; padding:0; font-size:13.5px; }
+
+        table { border-collapse:collapse; margin:14px 0 18px; font-size:15px; width:100%; max-width:860px; }
+        th, td { text-align:left; vertical-align:top; padding:6px 10px; border-bottom:1px solid var(--line); }
+        th { border-bottom:2px solid #bbb; font-weight:600; }
+
+        .nota { border:1px solid var(--line); background:#fafafa; padding:8px 14px; margin:14px 0; max-width:70ch; font-size:15px; }
+        .nota p { margin:4px 0; }
+
+        footer { margin-top:48px; color:var(--muted); font-size:14px; }
+
+        @media (max-width: 820px) {
+          .wrap { display:block; }
+          nav { position:static; height:auto; border-right:0; border-bottom:1px solid var(--line); }
+          main { padding:20px 16px 60px; }
+        }
+        @media print {
+          nav, .copiar { display:none; }
+          .wrap { display:block; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <nav>
+        <p class="nome">cadastro-funcionarios</p>
+        <input type="search" id="busca" placeholder="Filtrar seções" aria-label="Filtrar seções">
+        <ul>
+            <li><a href="#visao-geral">Visão geral</a></li>
+            <li><a href="#maven">Maven e pom.xml</a></li>
+            <li><a href="#git">Git e GitHub</a></li>
+            <li><a href="#hibernate">Hibernate: configuração</a></li>
+            <li><a href="#credenciais">Credenciais fora do Git</a></li>
+            <li><a href="#mapeamento">Mapeamento em XML</a></li>
+            <li><a href="#banco">PostgreSQL no Docker</a></li>
+            <li><a href="#dao">DAO</a></li>
+            <li><a href="#service">Service e injeção de dependência</a></li>
+            <li><a href="#testes">Testes unitários</a></li>
+            <li><a href="#web">Servlets e JSP</a></li>
+            <li><a href="#formulario">Formulário único</a></li>
+            <li><a href="#validacao">Validação no navegador</a></li>
+            <li><a href="#filtros">Filters</a></li>
+            <li><a href="#paginacao">Paginação</a></li>
+            <li><a href="#logs">Logging</a></li>
+            <li><a href="#servidores">Jetty e Tomcat</a></li>
+            <li><a href="#erros">Erros que já apareceram</a></li>
+            <li><a href="#links">Links</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <h1>cadastro-funcionarios</h1>
+        <p class="sub">Anotações do projeto, organizadas por assunto para consulta nos próximos. Atualizado até a tag v0.5.0.</p>
+
+        <section id="visao-geral">
+            <h2>Visão geral</h2>
+            <p>CRUD de funcionários em Java 8 com Hibernate, Servlets e JSP, sem Spring Boot. A ideia era montar na mão o que um framework faz sozinho: mapeamento, camadas, ciclo de requisição e deploy.</p>
+
+            <h3>Versões usadas</h3>
+            <table>
+                <tr><th>Item</th><th>Versão</th><th>Observação</th></tr>
+                <tr><td>Java</td><td>8</td><td>Define o teto de quase todas as outras versões</td></tr>
+                <tr><td>Hibernate ORM</td><td>5.6.15.Final</td><td>A série 6 exige Java 11</td></tr>
+                <tr><td>Driver PostgreSQL</td><td>42.7.13</td><td></td></tr>
+                <tr><td>Servlet / JSP / JSTL</td><td>3.1 ou 4.0 / 2.3 / 1.2</td><td>Pacotes <code>javax.*</code>. O <code>jakarta.*</code> começa no Tomcat 10 e no Jetty 11</td></tr>
+                <tr><td>Jetty (plugin Maven)</td><td>9.4.58.v20250814</td><td>Só para desenvolvimento. A série 9 está sem suporte desde janeiro de 2026</td></tr>
+                <tr><td>Tomcat</td><td>9.0.x</td><td>Roda em Java 8, namespace <code>javax</code></td></tr>
+                <tr><td>JUnit Jupiter</td><td>5.10.5</td><td>A série 5 roda em Java 8. A série 6 exige Java 17</td></tr>
+                <tr><td>Mockito</td><td>4.11.0</td><td>A série 5 exige Java 11</td></tr>
+                <tr><td>SLF4J / Logback</td><td>2.0.13 / 1.3.15</td><td>Logback 1.4 em diante exige Java 11. A série 1.3 está sem suporte</td></tr>
+            </table>
+
+            <h3>Camadas</h3>
+            <div class="bloco"><div class="arq"><span>fluxo</span><button type="button" class="copiar">copiar</button></div><pre><code>Navegador -&gt; Filters -&gt; Servlet (controller) -&gt; Service -&gt; DAO -&gt; Hibernate -&gt; PostgreSQL
+                              |
+                              +-&gt; JSP (em WEB-INF/views)</code></pre></div>
+            <p>Cada camada só chama a de baixo. O DAO nunca importa nada de <code>service</code>, e o Service nunca importa nada de <code>servlet</code>. Pacotes: <code>controller</code>, <code>service</code>, <code>dao</code>, <code>model</code>, <code>filter</code> e <code>util</code>, todos sob <code>br.com.tiagoribeiro</code>.</p>
+        </section>
+
+        <section id="maven">
+            <h2>Maven e pom.xml</h2>
+            <p>Projeto criado com o arquétipo <code>maven-archetype-webapp</code>. O <code>packaging</code> precisa ser <code>war</code>, porque o resultado é um pacote para rodar dentro de um servidor.</p>
+
+            <div class="bloco"><div class="arq"><span>pom.xml (trecho)</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;packaging&gt;war&lt;/packaging&gt;
+
+&lt;properties&gt;
+    &lt;maven.compiler.source&gt;1.8&lt;/maven.compiler.source&gt;
+    &lt;maven.compiler.target&gt;1.8&lt;/maven.compiler.target&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+&lt;/properties&gt;
+
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.hibernate&lt;/groupId&gt;
+        &lt;artifactId&gt;hibernate-core&lt;/artifactId&gt;
+        &lt;version&gt;5.6.15.Final&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.postgresql&lt;/groupId&gt;
+        &lt;artifactId&gt;postgresql&lt;/artifactId&gt;
+        &lt;version&gt;42.7.13&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.servlet-api&lt;/artifactId&gt;
+        &lt;version&gt;3.1.0&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet.jsp&lt;/groupId&gt;
+        &lt;artifactId&gt;javax.servlet.jsp-api&lt;/artifactId&gt;
+        &lt;version&gt;2.3.3&lt;/version&gt;
+        &lt;scope&gt;provided&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+        &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+        &lt;version&gt;1.2&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.slf4j&lt;/groupId&gt;
+        &lt;artifactId&gt;slf4j-api&lt;/artifactId&gt;
+        &lt;version&gt;2.0.13&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;ch.qos.logback&lt;/groupId&gt;
+        &lt;artifactId&gt;logback-classic&lt;/artifactId&gt;
+        &lt;version&gt;1.3.15&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.junit.jupiter&lt;/groupId&gt;
+        &lt;artifactId&gt;junit-jupiter&lt;/artifactId&gt;
+        &lt;version&gt;5.10.5&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mockito&lt;/groupId&gt;
+        &lt;artifactId&gt;mockito-core&lt;/artifactId&gt;
+        &lt;version&gt;4.11.0&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.mockito&lt;/groupId&gt;
+        &lt;artifactId&gt;mockito-junit-jupiter&lt;/artifactId&gt;
+        &lt;version&gt;4.11.0&lt;/version&gt;
+        &lt;scope&gt;test&lt;/scope&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;</code></pre></div>
+
+            <h3>Escopo provided</h3>
+            <p>As APIs de Servlet e JSP usam <code>provided</code>: são necessárias para compilar, mas o servidor já as fornece em tempo de execução. Empacotar de novo no <code>.war</code> pode gerar conflito de versão com o que o servidor carrega.</p>
+
+            <h3>Compilar contra a menor versão de Servlet</h3>
+            <p>O Jetty 9.4 executa Servlet 3.1, e o Tomcat 9 executa 4.0. Se o <code>pom.xml</code> compila contra 4.0.1, o compilador deixa passar recursos que só existem na 4.0 e o erro só aparece em execução (veja a seção de Filters). Compilando contra 3.1.0, o erro aparece na compilação, e o Tomcat 9 continua rodando normalmente.</p>
+
+            <h3>Surefire e JUnit 5</h3>
+            <p>O Maven 3.8.x vem com um maven-surefire-plugin antigo (2.12.4), que não enxerga testes JUnit 5: o build passa com "Tests run: 0". Fixar uma versão recente resolve:</p>
+            <div class="bloco"><div class="arq"><span>pom.xml (build)</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;build&gt;
+    &lt;finalName&gt;cadastro-funcionarios&lt;/finalName&gt;
+    &lt;plugins&gt;
+        &lt;plugin&gt;
+            &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+            &lt;version&gt;3.2.5&lt;/version&gt;
+        &lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/build&gt;</code></pre></div>
+            <p>Confira com <code>mvn -v</code> qual Maven está em uso e com <code>mvn test</code> se os testes aparecem na saída.</p>
+        </section>
+
+        <section id="git">
+            <h2>Git e GitHub</h2>
+
+            <h3>Autenticação por SSH</h3>
+            <p>O GitHub não aceita mais a senha da conta em operações de linha de comando (desde 2021). Com SSH, a configuração é feita uma vez por computador.</p>
+            <div class="bloco"><div class="arq"><span>terminal</span><button type="button" class="copiar">copiar</button></div><pre><code>ssh-keygen -t ed25519 -C "seu-email@exemplo.com"
+cat ~/.ssh/id_ed25519.pub      # colar em GitHub &gt; Settings &gt; SSH and GPG keys
+git remote set-url origin git@github.com:usuario/repositorio.git
+ssh -T git@github.com          # confirma a autenticação</code></pre></div>
+
+            <h3>Branches</h3>
+            <table>
+                <tr><th>Branch</th><th>Uso</th></tr>
+                <tr><td><code>main</code></td><td>Sempre estável. Só recebe merge da <code>develop</code></td></tr>
+                <tr><td><code>develop</code></td><td>Integração das features</td></tr>
+                <tr><td><code>feature/*</code>, <code>refactor/*</code>, <code>docs/*</code></td><td>Uma por tarefa, criadas a partir da <code>develop</code></td></tr>
+            </table>
+
+            <div class="bloco"><div class="arq"><span>terminal (ciclo de uma feature)</span><button type="button" class="copiar">copiar</button></div><pre><code>git checkout develop
+git checkout -b feature/nome-da-feature
+git add .
+git commit -m "feat: descricao curta"
+git checkout develop
+git merge feature/nome-da-feature
+git branch -d feature/nome-da-feature
+git push origin develop</code></pre></div>
+
+            <h3>Mensagens de commit</h3>
+            <p>Padrão Conventional Commits: <code>feat:</code>, <code>fix:</code>, <code>refactor:</code>, <code>test:</code>, <code>docs:</code> e <code>chore:</code>, seguidos de um espaço e de uma descrição curta. Exemplo: <code>feat: adiciona paginacao na listagem</code>.</p>
+
+            <h3>Tags</h3>
+            <div class="bloco"><div class="arq"><span>terminal</span><button type="button" class="copiar">copiar</button></div><pre><code>git tag -a v0.1.0 -m "Hibernate conectado ao PostgreSQL"
+git push origin v0.1.0</code></pre></div>
+            <table>
+                <tr><th>Tag</th><th>Marco</th></tr>
+                <tr><td>v0.0.1</td><td>Estrutura inicial do projeto Maven</td></tr>
+                <tr><td>v0.1.0</td><td>Hibernate conectado ao PostgreSQL</td></tr>
+                <tr><td>v0.2.0</td><td>DAO, Service e testes unitários</td></tr>
+                <tr><td>v0.3.0</td><td>CRUD completo pela web</td></tr>
+                <tr><td>v0.4.0</td><td>Mensagens, CSS e logging</td></tr>
+                <tr><td>v0.5.0</td><td>Formulário único, validação HTML5, filtros e paginação</td></tr>
+            </table>
+
+            <div class="nota">
+                <p><code>git commit --amend</code> só é seguro antes do <code>push</code>. Depois que o commit foi publicado, reescrever o histórico traz problemas.</p>
+                <p>O <code>.gitignore</code> precisa conter <code>config.properties</code>, <code>target/</code> e <code>logs/</code>.</p>
+            </div>
+        </section>
+
+        <section id="hibernate">
+            <h2>Hibernate: configuração</h2>
+            <p>O <code>hibernate.cfg.xml</code> guarda o que pode ser público: dialeto, exibição do SQL, comportamento do schema e a lista de mapeamentos. Usuário, senha e URL ficam em outro arquivo (próxima seção).</p>
+
+            <div class="bloco"><div class="arq"><span>hibernate.cfg.xml</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd"&gt;
+
+&lt;hibernate-configuration&gt;
+    &lt;session-factory&gt;
+        &lt;property name="hibernate.dialect"&gt;org.hibernate.dialect.PostgreSQLDialect&lt;/property&gt;
+        &lt;property name="hibernate.show_sql"&gt;true&lt;/property&gt;
+        &lt;property name="hibernate.format_sql"&gt;true&lt;/property&gt;
+        &lt;property name="hibernate.hbm2ddl.auto"&gt;update&lt;/property&gt;
+        &lt;property name="hibernate.default_schema"&gt;cadastro_funcionarios&lt;/property&gt;
+
+        &lt;mapping resource="br/com/tiagoribeiro/model/Funcionario.hbm.xml"/&gt;
+    &lt;/session-factory&gt;
+&lt;/hibernate-configuration&gt;</code></pre></div>
+
+            <h3>hbm2ddl.auto</h3>
+            <table>
+                <tr><th>Valor</th><th>O que faz</th><th>Uso</th></tr>
+                <tr><td><code>validate</code></td><td>Só confere se as tabelas batem com o mapeamento</td><td>Produção</td></tr>
+                <tr><td><code>update</code></td><td>Cria e ajusta tabelas sem apagar dados</td><td>Desenvolvimento</td></tr>
+                <tr><td><code>create</code>, <code>create-drop</code></td><td>Apaga e recria tudo</td><td>Só testes descartáveis</td></tr>
+            </table>
+            <p>Use o <code>PostgreSQLDialect</code> genérico. Nomes como <code>PostgreSQL9Dialect</code>, comuns em tutoriais antigos, não são mais necessários porque o Hibernate detecta a versão do banco.</p>
+            <p><code>hibernate.default_schema</code> faz toda tabela sem schema explícito cair em <code>cadastro_funcionarios</code>, sem alterar o <code>.hbm.xml</code>.</p>
+        </section>
+
+        <section id="credenciais">
+            <h2>Credenciais fora do Git</h2>
+            <p>Senha de banco nunca vai para um arquivo versionado, porque fica no histórico mesmo depois de apagada. O <code>config.properties</code> fica de fora do Git, e um <code>config.properties.example</code> sem dados reais é versionado como documentação.</p>
+
+            <div class="bloco"><div class="arq"><span>src/main/resources/config.properties</span><button type="button" class="copiar">copiar</button></div><pre><code>db.driver=org.postgresql.Driver
+db.url=jdbc:postgresql://localhost:5432/javadb
+db.username=usuario
+db.password=senha</code></pre></div>
+
+            <div class="bloco"><div class="arq"><span>.gitignore</span><button type="button" class="copiar">copiar</button></div><pre><code>config.properties
+target/
+logs/</code></pre></div>
+
+            <div class="bloco"><div class="arq"><span>util/HibernateUtil.java</span><button type="button" class="copiar">copiar</button></div><pre><code>public class HibernateUtil {
+
+    private static final SessionFactory sessionFactory = buildSessionFactory();
+
+    private static SessionFactory buildSessionFactory() {
+        try {
+            Properties db = loadDbProperties();
+
+            Configuration configuration = new Configuration();
+            configuration.configure("hibernate.cfg.xml");
+
+            configuration.setProperty("hibernate.connection.driver_class", db.getProperty("db.driver"));
+            configuration.setProperty("hibernate.connection.url", db.getProperty("db.url"));
+            configuration.setProperty("hibernate.connection.username", db.getProperty("db.username"));
+            configuration.setProperty("hibernate.connection.password", db.getProperty("db.password"));
+
+            return configuration.buildSessionFactory();
+        } catch (Exception e) {
+            throw new ExceptionInInitializerError("Erro ao inicializar o SessionFactory: " + e);
+        }
+    }
+
+    private static Properties loadDbProperties() throws IOException {
+        Properties props = new Properties();
+        try (InputStream in = HibernateUtil.class.getClassLoader().getResourceAsStream("config.properties")) {
+            if (in == null) {
+                throw new IOException("config.properties nao encontrado em src/main/resources");
+            }
+            props.load(in);
+        }
+        return props;
+    }
+
+    public static SessionFactory getSessionFactory() {
+        return sessionFactory;
+    }
+}</code></pre></div>
+            <p><code>setProperty</code> sobrescreve por código o que viria do XML. A SessionFactory é criada uma única vez, no carregamento da classe, porque é um objeto caro.</p>
+            <p>Classe de infraestrutura não é DAO: o <code>HibernateUtil</code> fica em <code>util</code>, não em <code>dao</code>.</p>
+        </section>
+
+        <section id="mapeamento">
+            <h2>Mapeamento em XML</h2>
+            <p>O <code>.hbm.xml</code> diz ao Hibernate qual atributo da classe corresponde a qual coluna da tabela.</p>
+
+            <div class="bloco"><div class="arq"><span>Funcionario.hbm.xml</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"&gt;
+
+&lt;hibernate-mapping&gt;
+    &lt;class name="br.com.tiagoribeiro.model.Funcionario" table="FUNCIONARIO"&gt;
+
+        &lt;id name="id" column="ID"&gt;
+            &lt;generator class="native"/&gt;
+        &lt;/id&gt;
+
+        &lt;property name="nome" column="NOME" type="string" not-null="true" length="100"/&gt;
+        &lt;property name="cargo" column="CARGO" type="string" not-null="true" length="100"/&gt;
+        &lt;property name="salario" column="SALARIO" type="big_decimal" not-null="true"/&gt;
+
+    &lt;/class&gt;
+&lt;/hibernate-mapping&gt;</code></pre></div>
+
+            <table>
+                <tr><th>Atributo</th><th>Significado</th></tr>
+                <tr><td><code>class name</code>, <code>table</code></td><td>Classe Java (nome completo) e tabela do banco</td></tr>
+                <tr><td><code>generator class="native"</code></td><td>O Hibernate escolhe a estratégia do banco. No PostgreSQL vira uma sequence (<code>hibernate_sequence</code>)</td></tr>
+                <tr><td><code>type</code></td><td>Tipo do Hibernate (<code>string</code>, <code>big_decimal</code>, ...), que não é nem o tipo Java nem o SQL</td></tr>
+                <tr><td><code>length</code></td><td>Tamanho da coluna, equivale a <code>VARCHAR(100)</code></td></tr>
+                <tr><td><code>not-null</code></td><td>Gera <code>NOT NULL</code> na coluna</td></tr>
+            </table>
+
+            <div class="nota">
+                <p>O arquivo fica em <code>src/main/resources</code>, no caminho do pacote com barras: <code>br/com/tiagoribeiro/model/Funcionario.hbm.xml</code>. Se a pasta for criada como <code>br.com.tiagoribeiro.model</code> (uma única pasta com pontos no nome), o Hibernate lança <code>MappingNotFoundException</code>. A IDE exibe os dois jeitos de forma parecida, então a conferência é no disco: <code>find target/classes -name "*.hbm.xml"</code>.</p>
+            </div>
+        </section>
+
+        <section id="banco">
+            <h2>PostgreSQL no Docker</h2>
+            <p>Um banco pode ter vários schemas, então um único container serve a vários projetos, cada um no seu schema. Banco é o conjunto todo, schema é uma divisão interna dele.</p>
+
+            <div class="bloco"><div class="arq"><span>terminal</span><button type="button" class="copiar">copiar</button></div><pre><code>docker run --name postgres-dev \
+  -e POSTGRES_USER=usuario -e POSTGRES_PASSWORD=senha -e POSTGRES_DB=javadb \
+  -p 5432:5432 -d postgres
+
+psql -U usuario -h localhost -d javadb -c "CREATE SCHEMA cadastro_funcionarios AUTHORIZATION usuario;"
+psql -U usuario -h localhost -d postgres -c "\l"      # lista os bancos do servidor</code></pre></div>
+
+            <p>A URL JDBC sempre aponta para um banco (<code>jdbc:postgresql://localhost:5432/javadb</code>). O schema é escolhido depois, pelo <code>hibernate.default_schema</code>. O erro <code>database "x" does not exist</code> (SQLState <code>3D000</code>) fala do banco, mesmo quando o nome informado era o de um schema.</p>
+        </section>
+
+        <section id="dao">
+            <h2>DAO</h2>
+            <p>É o único ponto que conversa com o Hibernate. O resto do sistema chama a interface e não sabe como os dados são gravados.</p>
+
+            <div class="bloco"><div class="arq"><span>dao/FuncionarioDAO.java</span><button type="button" class="copiar">copiar</button></div><pre><code>public interface FuncionarioDAO {
+    void salvar(Funcionario funcionario);
+    Funcionario buscarPorId(Long id);
+    List&lt;Funcionario&gt; listarTodos();
+    List&lt;Funcionario&gt; listarPaginado(int primeiroRegistro, int tamanho);
+    long contar();
+    void atualizar(Funcionario funcionario);
+    void deletar(Long id);
+}</code></pre></div>
+
+            <div class="bloco"><div class="arq"><span>dao/FuncionarioDAOImpl.java (trechos)</span><button type="button" class="copiar">copiar</button></div><pre><code>@Override
+public void salvar(Funcionario funcionario) {
+    Transaction transaction = null;
+
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        transaction = session.beginTransaction();
+        session.save(funcionario);
+        transaction.commit();
+    } catch (Exception e) {
+        if (transaction != null) {
+            transaction.rollback();
+        }
+        throw new RuntimeException("Erro ao salvar funcionario: " + e.getMessage(), e);
+    }
+}
+
+@Override
+public Funcionario buscarPorId(Long id) {
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        return session.get(Funcionario.class, id);
+    }
+}</code></pre></div>
+
+            <ul>
+                <li>Uma <code>Session</code> por operação, aberta e fechada com try-with-resources. É simples e evita conexão esquecida aberta.</li>
+                <li>Só operações que alteram dados abrem <code>Transaction</code>. Leitura não precisa.</li>
+                <li>O <code>if (transaction != null)</code> no catch existe porque a exceção pode acontecer antes de <code>beginTransaction()</code> terminar. Sem a checagem, o rollback geraria um <code>NullPointerException</code> que esconde o erro real.</li>
+                <li><code>session.update(funcionario)</code> usa o <code>id</code> que já está dentro do objeto para montar o <code>WHERE ID = ?</code>. Por isso o fluxo de edição é buscar, alterar os campos e salvar de volta.</li>
+                <li>HQL usa o nome da classe (<code>FROM Funcionario</code>), não o da tabela.</li>
+            </ul>
+        </section>
+
+        <section id="service">
+            <h2>Service e injeção de dependência</h2>
+            <p>O Service aplica as regras de negócio antes de chegar ao DAO. Todo Servlet fala com ele, nunca direto com o DAO.</p>
+
+            <div class="bloco"><div class="arq"><span>service/FuncionarioService.java (trechos)</span><button type="button" class="copiar">copiar</button></div><pre><code>public class FuncionarioService {
+
+    private static final Logger logger = LoggerFactory.getLogger(FuncionarioService.class);
+
+    private final FuncionarioDAO dao;
+
+    public FuncionarioService() {
+        this.dao = new FuncionarioDAOImpl();
+    }
+
+    public FuncionarioService(FuncionarioDAO dao) {
+        this.dao = dao;
+    }
+
+    public void cadastrar(Funcionario funcionario) {
+        validar(funcionario);
+        dao.salvar(funcionario);
+    }
+
+    public Funcionario buscarPorId(Long id) {
+        Funcionario funcionario = dao.buscarPorId(id);
+        if (funcionario == null) {
+            logger.warn("Funcionario inexistente, id: {}", id);
+            throw new IllegalArgumentException("Funcionario com id " + id + " nao encontrado.");
+        }
+        return funcionario;
+    }
+
+    public void atualizar(Long id, Funcionario dadosNovos) {
+        Funcionario existente = buscarPorId(id);
+        existente.setNome(dadosNovos.getNome());
+        existente.setCargo(dadosNovos.getCargo());
+        existente.setSalario(dadosNovos.getSalario());
+        validar(existente);
+        dao.atualizar(existente);
+    }
+
+    private void validar(Funcionario f) {
+        if (f.getNome() == null || f.getNome().trim().isEmpty()) {
+            throw new IllegalArgumentException("Nome do funcionario e obrigatorio.");
+        }
+        if (f.getCargo() == null || f.getCargo().trim().isEmpty()) {
+            throw new IllegalArgumentException("Cargo do funcionario e obrigatorio.");
+        }
+        if (f.getSalario() == null || f.getSalario().compareTo(BigDecimal.ZERO) &lt;= 0) {
+            throw new IllegalArgumentException("Salario deve ser maior que zero.");
+        }
+    }
+}</code></pre></div>
+
+            <p>O segundo construtor recebe o DAO de fora. Isso é injeção de dependência por construtor, o mesmo que o <code>@Autowired</code> do Spring automatiza. Com <code>private final FuncionarioDAO dao = new FuncionarioDAOImpl();</code> direto na declaração, o <code>@InjectMocks</code> do Mockito não consegue trocar o campo e o teste acaba rodando contra o banco real.</p>
+        </section>
+
+        <section id="testes">
+            <h2>Testes unitários</h2>
+            <p>Testes ficam em <code>src/test/java</code>, espelhando o pacote da classe testada. O Mockito cria um DAO falso, então o teste exercita só a lógica do Service, sem banco.</p>
+
+            <div class="bloco"><div class="arq"><span>service/FuncionarioServiceTest.java (trechos)</span><button type="button" class="copiar">copiar</button></div><pre><code>@ExtendWith(MockitoExtension.class)
+class FuncionarioServiceTest {
+
+    @Mock
+    private FuncionarioDAO dao;
+
+    @InjectMocks
+    private FuncionarioService service;
+
+    @Test
+    void deveRejeitarFuncionarioComNomeVazio() {
+        Funcionario f = new Funcionario();
+        f.setNome("");
+        f.setCargo("Analista");
+        f.setSalario(new BigDecimal("4000.00"));
+
+        IllegalArgumentException e = assertThrows(
+                IllegalArgumentException.class, () -&gt; service.cadastrar(f));
+
+        assertEquals("Nome do funcionario e obrigatorio.", e.getMessage());
+        verify(dao, never()).salvar(any());
+    }
+
+    @Test
+    void deveLancarExcecaoAoBuscarFuncionarioInexistente() {
+        when(dao.buscarPorId(99L)).thenReturn(null);
+
+        IllegalArgumentException e = assertThrows(
+                IllegalArgumentException.class, () -&gt; service.buscarPorId(99L));
+
+        assertTrue(e.getMessage().contains("99"));
+    }
+}</code></pre></div>
+
+            <table>
+                <tr><th>Anotação ou método</th><th>Função</th></tr>
+                <tr><td><code>@Mock</code></td><td>Cria a dependência falsa</td></tr>
+                <tr><td><code>@InjectMocks</code></td><td>Cria a classe real e injeta os mocks nela</td></tr>
+                <tr><td><code>when(...).thenReturn(...)</code></td><td>Define a resposta do mock</td></tr>
+                <tr><td><code>verify(dao, times(1)).salvar(x)</code></td><td>Confirma que o método foi chamado</td></tr>
+                <tr><td><code>assertThrows(...)</code></td><td>Confirma que a exceção aconteceu</td></tr>
+            </table>
+
+            <ul>
+                <li>Estrutura de cada teste: preparar os dados, executar a ação, conferir o resultado (Arrange, Act, Assert).</li>
+                <li>O Mockito em modo estrito acusa <code>UnnecessaryStubbingException</code> quando um <code>when</code> nunca é usado. Se ao mesmo tempo aparece SQL do Hibernate no console, o mock não foi injetado e o Service está usando o DAO real.</li>
+                <li><code>assertEquals</code> na mensagem compara caractere por caractere. Use quando a mensagem é um contrato. Para mensagens internas, <code>contains("99")</code> aguenta pequenas mudanças de redação.</li>
+            </ul>
+        </section>
+
+        <section id="web">
+            <h2>Servlets e JSP</h2>
+
+            <h3>forward e redirect</h3>
+            <table>
+                <tr><th></th><th>forward</th><th>redirect</th></tr>
+                <tr><td>Onde acontece</td><td>Dentro do servidor</td><td>O navegador faz uma nova requisição</td></tr>
+                <tr><td>URL na barra</td><td>Não muda</td><td>Muda</td></tr>
+                <tr><td>Requisições</td><td>Uma</td><td>Duas</td></tr>
+                <tr><td>Atributos do <code>request</code></td><td>Continuam disponíveis</td><td>Perdidos</td></tr>
+            </table>
+
+            <h3>Post/Redirect/Get</h3>
+            <p>Depois de um POST que gravou algo, responda com redirect. Assim, atualizar a página repete só o GET da lista e não reenvia o formulário (o que cadastraria o mesmo funcionário duas vezes). Em caso de erro de validação, use forward de volta ao formulário, para manter o que o usuário digitou e mostrar a mensagem.</p>
+
+            <div class="bloco"><div class="arq"><span>controller/SalvarFuncionarioServlet.java (doPost)</span><button type="button" class="copiar">copiar</button></div><pre><code>Funcionario funcionario = new Funcionario();
+funcionario.setNome(request.getParameter("nome"));
+funcionario.setCargo(request.getParameter("cargo"));
+
+try {
+    funcionario.setSalario(new BigDecimal(request.getParameter("salario")));
+    service.cadastrar(funcionario);
+    response.sendRedirect(request.getContextPath() + "/funcionarios?sucesso=cadastrado");
+} catch (NumberFormatException e) {
+    reexibirFormulario(request, response, funcionario, "Salario invalido.");
+} catch (IllegalArgumentException e) {
+    reexibirFormulario(request, response, funcionario, e.getMessage());
+}</code></pre></div>
+
+            <ul>
+                <li>Tudo o que pode lançar exceção (inclusive <code>Long.parseLong</code> do <code>id</code>) precisa estar dentro do <code>try</code>. Uma conversão fora dele vira erro 500 cru para o usuário.</li>
+                <li><code>getRequestDispatcher</code> com caminho que começa em <code>/</code> parte da raiz da aplicação. Sem a barra inicial, o caminho é relativo à URL atual e aparece algo como <code>/funcionarios/WEB-INF/...</code>.</li>
+                <li>Tudo dentro de <code>WEB-INF</code> é inacessível pela URL. As views ficam lá para só serem alcançadas por <code>forward</code>.</li>
+                <li>Ações que alteram dados são POST, nunca links GET. Um GET pode ser disparado por crawler, pré-carregamento ou clique repetido.</li>
+            </ul>
+
+            <h3>web.xml</h3>
+            <div class="bloco"><div class="arq"><span>WEB-INF/web.xml</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+             http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0"&gt;
+
+    &lt;servlet&gt;
+        &lt;servlet-name&gt;ListarFuncionarioServlet&lt;/servlet-name&gt;
+        &lt;servlet-class&gt;br.com.tiagoribeiro.controller.ListarFuncionarioServlet&lt;/servlet-class&gt;
+    &lt;/servlet&gt;
+    &lt;servlet-mapping&gt;
+        &lt;servlet-name&gt;ListarFuncionarioServlet&lt;/servlet-name&gt;
+        &lt;url-pattern&gt;/funcionarios&lt;/url-pattern&gt;
+    &lt;/servlet-mapping&gt;
+
+    &lt;!-- um par servlet / servlet-mapping para cada Servlet:
+         /funcionarios/novo, /funcionarios/editar, /funcionarios/deletar --&gt;
+&lt;/web-app&gt;</code></pre></div>
+            <div class="nota">
+                <p>O arquétipo do Maven gera um <code>web.xml</code> declarando Servlet 2.3 (DTD de 1999), anterior à Expression Language. Com essa versão declarada, <code>${funcionario.nome}</code> aparece como texto literal na página. Troque para Servlet 4.0, na sintaxe XSD mostrada acima, e apague o texto solto "Archetype Created Web Application" que o arquétipo deixa dentro de <code>web-app</code>.</p>
+            </div>
+
+            <h3>JSTL e Expression Language</h3>
+            <div class="bloco"><div class="arq"><span>listar.jsp (trecho)</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %&gt;
+
+&lt;c:forEach var="funcionario" items="${pagina.itens}"&gt;
+    &lt;tr&gt;
+        &lt;td&gt;${funcionario.id}&lt;/td&gt;
+        &lt;td&gt;${funcionario.nome}&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/c:forEach&gt;</code></pre></div>
+            <ul>
+                <li><code>${funcionario.nome}</code> chama <code>getNome()</code>. O nome usado tem que bater com a chave de <code>request.setAttribute("chave", valor)</code>. Um erro de digitação não gera exceção, só deixa a tabela vazia.</li>
+                <li><code>&lt;c:if&gt;</code> não tem <code>else</code>. Para duas saídas, use <code>&lt;c:choose&gt;</code>, <code>&lt;c:when&gt;</code> e <code>&lt;c:otherwise&gt;</code>.</li>
+            </ul>
+
+            <h3>Mensagem de sucesso depois do redirect</h3>
+            <p>O <code>redirect</code> descarta os atributos do <code>request</code>, então a mensagem viaja na URL e é lida no JSP com <code>param</code>:</p>
+            <div class="bloco"><div class="arq"><span>Servlet e JSP</span><button type="button" class="copiar">copiar</button></div><pre><code>// Servlet
+response.sendRedirect(request.getContextPath() + "/funcionarios?sucesso=atualizado");
+
+&lt;%-- JSP, antes da tabela e fora de qualquer forEach --%&gt;
+&lt;c:if test="${param.sucesso == 'atualizado'}"&gt;
+    &lt;p class="alerta alerta-sucesso"&gt;Funcionário atualizado com sucesso!&lt;/p&gt;
+&lt;/c:if&gt;</code></pre></div>
+            <p>Se a mensagem ficar dentro do <code>forEach</code>, ela se repete uma vez por linha da tabela.</p>
+
+            <h3>Arquivos estáticos</h3>
+            <p>CSS, JS e imagens ficam em <code>src/main/webapp/css/</code>, fora do <code>WEB-INF</code>, porque o navegador precisa baixá-los direto. Referência no JSP, dentro do <code>head</code>:</p>
+            <div class="bloco"><div class="arq"><span>JSP</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css"&gt;</code></pre></div>
+            <p><code>${pageContext.request.contextPath}</code> evita escrever o nome do contexto na mão em cada link.</p>
+        </section>
+
+        <section id="formulario">
+            <h2>Formulário único</h2>
+            <p>Cadastro e edição usam o mesmo <code>formulario.jsp</code>. O modo é decidido pela existência do <code>id</code> no objeto.</p>
+
+            <div class="bloco"><div class="arq"><span>WEB-INF/views/formulario.jsp (trecho)</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;c:set var="editando" value="${not empty funcionario.id}"/&gt;
+
+&lt;h1&gt;${editando ? 'Editar' : 'Cadastrar'} Funcionário&lt;/h1&gt;
+
+&lt;form method="post"
+      action="${pageContext.request.contextPath}${editando ? '/funcionarios/editar' : '/funcionarios/novo'}"&gt;
+
+    &lt;c:if test="${editando}"&gt;
+        &lt;input type="hidden" name="id" value="${funcionario.id}"&gt;
+    &lt;/c:if&gt;
+
+    ...campos...
+
+    &lt;button type="submit"&gt;${editando ? 'Salvar alterações' : 'Salvar'}&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+            <ul>
+                <li><code>c:set</code> guarda o booleano uma vez, para não repetir a condição.</li>
+                <li><code>cond ? a : b</code> na EL funciona como o ternário do Java.</li>
+                <li>Os dois Servlets passam a encaminhar para <code>formulario.jsp</code>, inclusive no <code>reexibirFormulario</code>. Os JSPs antigos devem ser apagados.</li>
+                <li>Efeito colateral: se o <code>id</code> chegar nulo ao <code>reexibirFormulario</code> da edição, o formulário volta em modo cadastro.</li>
+            </ul>
+        </section>
+
+        <section id="validacao">
+            <h2>Validação no navegador</h2>
+            <p>Atributos HTML5 evitam uma ida ao servidor por erro óbvio. É só conforto de uso, porque quem usa DevTools ou <code>curl</code> ignora essa camada. A validação que vale continua no Service.</p>
+
+            <div class="bloco"><div class="arq"><span>formulario.jsp (campos)</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;form method="post" action="..."
+      onsubmit="this.querySelector('button[type=submit]').disabled = true;"&gt;
+
+    &lt;label for="nome"&gt;Nome:&lt;/label&gt;
+    &lt;input type="text" id="nome" name="nome" value="${funcionario.nome}"
+           required maxlength="100" pattern=".*\S.*"
+           title="Informe o nome (não pode ser só espaços)"&gt;
+
+    &lt;label for="salario"&gt;Salário:&lt;/label&gt;
+    &lt;input type="number" id="salario" name="salario" value="${funcionario.salario}"
+           required min="0.01" step="0.01"&gt;
+
+    &lt;button type="submit"&gt;Salvar&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+
+            <table>
+                <tr><th>Atributo</th><th>Efeito</th></tr>
+                <tr><td><code>required</code></td><td>Bloqueia o envio com o campo vazio</td></tr>
+                <tr><td><code>maxlength</code></td><td>Respeita o <code>length</code> da coluna no <code>.hbm.xml</code></td></tr>
+                <tr><td><code>pattern=".*\S.*"</code></td><td>Exige ao menos um caractere que não seja espaço. Só <code>required</code> aceitaria "   "</td></tr>
+                <tr><td><code>type="number"</code> com <code>min</code> e <code>step</code></td><td>Só números, sempre com ponto decimal, que é o que <code>new BigDecimal(...)</code> espera. Com <code>type="text"</code>, "3500,50" cairia em <code>NumberFormatException</code></td></tr>
+                <tr><td><code>onsubmit</code> desabilitando o botão</td><td>Evita duplo clique. Só dispara depois que a validação do HTML5 passa</td></tr>
+            </table>
+            <p>Teste útil: apague o <code>required</code> pelo DevTools e envie o nome vazio. A mensagem do Service tem que aparecer.</p>
+        </section>
+
+        <section id="filtros">
+            <h2>Filters</h2>
+            <p>Um Filter intercepta toda requisição antes do Servlet e a resposta na volta. O que vem antes de <code>chain.doFilter(...)</code> roda na ida, o que vem depois roda na volta.</p>
+
+            <div class="bloco"><div class="arq"><span>filter/EncodingFilter.java</span><button type="button" class="copiar">copiar</button></div><pre><code>public class EncodingFilter implements Filter {
+
+    private static final String ENCODING = "UTF-8";
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+
+        request.setCharacterEncoding(ENCODING);
+        response.setCharacterEncoding(ENCODING);
+
+        chain.doFilter(request, response);
+    }
+
+    @Override
+    public void destroy() {
+    }
+}</code></pre></div>
+
+            <div class="bloco"><div class="arq"><span>filter/RequestLoggingFilter.java (doFilter)</span><button type="button" class="copiar">copiar</button></div><pre><code>HttpServletRequest req = (HttpServletRequest) request;
+HttpServletResponse resp = (HttpServletResponse) response;
+
+long inicio = System.currentTimeMillis();
+try {
+    chain.doFilter(request, response);
+} finally {
+    long duracao = System.currentTimeMillis() - inicio;
+    logger.info("{} {} -&gt; {} ({} ms)",
+            req.getMethod(), req.getRequestURI(), resp.getStatus(), duracao);
+}</code></pre></div>
+
+            <div class="bloco"><div class="arq"><span>WEB-INF/web.xml (filtros)</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;EncodingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;br.com.tiagoribeiro.filter.EncodingFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;EncodingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+
+&lt;filter&gt;
+    &lt;filter-name&gt;RequestLoggingFilter&lt;/filter-name&gt;
+    &lt;filter-class&gt;br.com.tiagoribeiro.filter.RequestLoggingFilter&lt;/filter-class&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;RequestLoggingFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;</code></pre></div>
+
+            <ul>
+                <li>A ordem dos <code>filter-mapping</code> no <code>web.xml</code> é a ordem de execução. O de encoding precisa ser o primeiro.</li>
+                <li><code>request.setCharacterEncoding</code> só tem efeito antes da primeira chamada a <code>getParameter</code>. O Tomcat 9 decodifica o corpo do POST como ISO-8859-1 por padrão, então "José" chega como "JosÃ©". O Jetty 9.4 costuma assumir UTF-8 e esconde o problema.</li>
+                <li>Esquecer o <code>chain.doFilter(...)</code> mata a requisição no filtro: a página volta em branco, sem erro.</li>
+                <li>O log não grava parâmetros nem corpo da requisição, para não registrar dados sensíveis.</li>
+                <li>Registros já gravados com acento quebrado não são corrigidos pelo filtro. Só os novos.</li>
+            </ul>
+
+            <div class="nota">
+                <p><code>init</code> e <code>destroy</code> só são métodos <code>default</code> na API Servlet 4.0. O Jetty 9.4 executa a 3.1, onde eles são abstratos. Um filtro compilado contra 4.0.1 sem esses métodos compila, mas falha na subida com <code>AbstractMethodError ... does not define or inherit an implementation of the resolved method 'abstract void init(javax.servlet.FilterConfig)'</code>. Implemente os dois, mesmo vazios.</p>
+            </div>
+        </section>
+
+        <section id="paginacao">
+            <h2>Paginação</h2>
+            <p>Em vez de carregar todas as linhas, o banco devolve só a página pedida. Passa por todas as camadas.</p>
+
+            <div class="bloco"><div class="arq"><span>dao/FuncionarioDAOImpl.java</span><button type="button" class="copiar">copiar</button></div><pre><code>@Override
+public List&lt;Funcionario&gt; listarPaginado(int primeiroRegistro, int tamanho) {
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        return session.createQuery("FROM Funcionario f ORDER BY f.id", Funcionario.class)
+                .setFirstResult(primeiroRegistro)
+                .setMaxResults(tamanho)
+                .list();
+    }
+}
+
+@Override
+public long contar() {
+    try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+        return session.createQuery("SELECT COUNT(f) FROM Funcionario f", Long.class)
+                .uniqueResult();
+    }
+}</code></pre></div>
+            <p><code>setFirstResult</code> e <code>setMaxResults</code> viram <code>offset</code> e <code>limit</code> no SQL. O <code>ORDER BY</code> é obrigatório na prática: sem ele o banco não garante a ordem, e a mesma linha pode aparecer em duas páginas ou em nenhuma.</p>
+
+            <div class="bloco"><div class="arq"><span>util/Pagina.java</span><button type="button" class="copiar">copiar</button></div><pre><code>public class Pagina&lt;T&gt; {
+
+    private final List&lt;T&gt; itens;
+    private final int paginaAtual;
+    private final int tamanho;
+    private final long totalItens;
+
+    public Pagina(List&lt;T&gt; itens, int paginaAtual, int tamanho, long totalItens) {
+        this.itens = itens;
+        this.paginaAtual = paginaAtual;
+        this.tamanho = tamanho;
+        this.totalItens = totalItens;
+    }
+
+    public List&lt;T&gt; getItens() { return itens; }
+    public int getPaginaAtual() { return paginaAtual; }
+    public int getTamanho() { return tamanho; }
+    public long getTotalItens() { return totalItens; }
+
+    public int getTotalPaginas() {
+        return (int) Math.ceil((double) totalItens / tamanho);
+    }
+
+    public boolean isTemAnterior() { return paginaAtual &gt; 1; }
+    public boolean isTemProxima() { return paginaAtual &lt; getTotalPaginas(); }
+}</code></pre></div>
+
+            <div class="bloco"><div class="arq"><span>service/FuncionarioService.java</span><button type="button" class="copiar">copiar</button></div><pre><code>public Pagina&lt;Funcionario&gt; listarPaginado(int pagina, int tamanho) {
+    if (tamanho &lt; 1) {
+        throw new IllegalArgumentException("Tamanho da pagina deve ser maior que zero.");
+    }
+
+    long total = dao.contar();
+    int totalPaginas = (int) Math.ceil((double) total / tamanho);
+
+    if (pagina &lt; 1) {
+        pagina = 1;
+    }
+    if (totalPaginas &gt; 0 &amp;&amp; pagina &gt; totalPaginas) {
+        pagina = totalPaginas;
+    }
+
+    int primeiroRegistro = (pagina - 1) * tamanho;
+    List&lt;Funcionario&gt; itens = dao.listarPaginado(primeiroRegistro, tamanho);
+
+    return new Pagina&lt;&gt;(itens, pagina, tamanho, total);
+}</code></pre></div>
+            <p>O ajuste do número da página protege de <code>?pagina=0</code> e <code>?pagina=999</code>, e também do caso em que o último item da última página é excluído: sem o ajuste, a tela mostraria uma tabela vazia.</p>
+
+            <div class="bloco"><div class="arq"><span>controller/ListarFuncionarioServlet.java (doGet)</span><button type="button" class="copiar">copiar</button></div><pre><code>int pagina = 1;
+try {
+    pagina = Integer.parseInt(request.getParameter("pagina"));
+} catch (NumberFormatException e) {
+    // parametro ausente ou invalido: fica na pagina 1
+}
+
+Pagina&lt;Funcionario&gt; resultado = service.listarPaginado(pagina, TAMANHO_PAGINA);
+request.setAttribute("pagina", resultado);</code></pre></div>
+
+            <div class="bloco"><div class="arq"><span>listar.jsp (navegação)</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;c:if test="${pagina.totalPaginas &gt; 1}"&gt;
+    &lt;nav class="paginacao"&gt;
+        &lt;c:if test="${pagina.temAnterior}"&gt;
+            &lt;a href="${pageContext.request.contextPath}/funcionarios?pagina=${pagina.paginaAtual - 1}"&gt;Anterior&lt;/a&gt;
+        &lt;/c:if&gt;
+
+        &lt;c:forEach begin="1" end="${pagina.totalPaginas}" var="p"&gt;
+            &lt;c:choose&gt;
+                &lt;c:when test="${p == pagina.paginaAtual}"&gt;&lt;strong&gt;${p}&lt;/strong&gt;&lt;/c:when&gt;
+                &lt;c:otherwise&gt;
+                    &lt;a href="${pageContext.request.contextPath}/funcionarios?pagina=${p}"&gt;${p}&lt;/a&gt;
+                &lt;/c:otherwise&gt;
+            &lt;/c:choose&gt;
+        &lt;/c:forEach&gt;
+
+        &lt;c:if test="${pagina.temProxima}"&gt;
+            &lt;a href="${pageContext.request.contextPath}/funcionarios?pagina=${pagina.paginaAtual + 1}"&gt;Próxima&lt;/a&gt;
+        &lt;/c:if&gt;
+    &lt;/nav&gt;
+&lt;/c:if&gt;</code></pre></div>
+            <p>A EL chama os getters: <code>${pagina.temProxima}</code> executa <code>isTemProxima()</code>, que calcula o valor em vez de guardá-lo. Para testar com muitos registros, vale um <code>main</code> temporário que chama <code>service.cadastrar</code> em um laço, em vez de inserir ids por SQL, porque assim a sequence do Hibernate continua coerente.</p>
+        </section>
+
+        <section id="logs">
+            <h2>Logging</h2>
+            <p>SLF4J é a interface e o Logback é a implementação. O código só conhece o SLF4J, então trocar o backend depois não mexe nas classes.</p>
+
+            <div class="bloco"><div class="arq"><span>src/main/resources/logback.xml</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;configuration&gt;
+
+    &lt;appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender"&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n&lt;/pattern&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender"&gt;
+        &lt;file&gt;logs/cadastro-funcionarios.log&lt;/file&gt;
+        &lt;rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"&gt;
+            &lt;fileNamePattern&gt;logs/cadastro-funcionarios.%d{yyyy-MM-dd}.log&lt;/fileNamePattern&gt;
+            &lt;maxHistory&gt;30&lt;/maxHistory&gt;
+        &lt;/rollingPolicy&gt;
+        &lt;encoder&gt;
+            &lt;pattern&gt;%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n&lt;/pattern&gt;
+        &lt;/encoder&gt;
+    &lt;/appender&gt;
+
+    &lt;root level="INFO"&gt;
+        &lt;appender-ref ref="CONSOLE"/&gt;
+        &lt;appender-ref ref="FILE"/&gt;
+    &lt;/root&gt;
+
+&lt;/configuration&gt;</code></pre></div>
+
+            <div class="bloco"><div class="arq"><span>uso em qualquer classe</span><button type="button" class="copiar">copiar</button></div><pre><code>private static final Logger logger = LoggerFactory.getLogger(FuncionarioService.class);
+
+logger.info("Cadastrando funcionario: {}", funcionario.getNome());
+logger.warn("Funcionario inexistente, id: {}", id);</code></pre></div>
+            <ul>
+                <li><code>{}</code> em vez de concatenar com <code>+</code>: se o nível estiver desligado, a string nem é montada.</li>
+                <li><code>INFO</code> é algo normal e relevante, <code>WARN</code> é algo estranho que o sistema contornou, <code>ERROR</code> é falha real.</li>
+                <li><code>TimeBasedRollingPolicy</code> cria um arquivo por dia e <code>maxHistory</code> apaga os mais antigos que 30 dias.</li>
+                <li>Os logs vão para <code>logs/</code>, que precisa estar no <code>.gitignore</code>.</li>
+            </ul>
+        </section>
+
+        <section id="servidores">
+            <h2>Jetty e Tomcat</h2>
+
+            <h3>Jetty pelo Maven (desenvolvimento)</h3>
+            <div class="bloco"><div class="arq"><span>pom.xml (plugins)</span><button type="button" class="copiar">copiar</button></div><pre><code>&lt;plugin&gt;
+    &lt;groupId&gt;org.eclipse.jetty&lt;/groupId&gt;
+    &lt;artifactId&gt;jetty-maven-plugin&lt;/artifactId&gt;
+    &lt;version&gt;9.4.58.v20250814&lt;/version&gt;
+    &lt;configuration&gt;
+        &lt;webApp&gt;
+            &lt;contextPath&gt;/cadastro-funcionarios&lt;/contextPath&gt;
+        &lt;/webApp&gt;
+        &lt;scanIntervalSeconds&gt;2&lt;/scanIntervalSeconds&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre></div>
+            <div class="bloco"><div class="arq"><span>terminal</span><button type="button" class="copiar">copiar</button></div><pre><code>mvn clean jetty:run
+# http://localhost:8080/cadastro-funcionarios/funcionarios</code></pre></div>
+            <p>O plugin roda direto sobre os arquivos do projeto, sem gerar <code>.war</code>. Mudanças no <code>web.xml</code> pedem reinício completo.</p>
+
+            <div class="nota">
+                <p>Com <code>scanIntervalSeconds</code> ativo e a IDE recompilando em segundo plano, o Jetty pode reiniciar o contexto no meio de uma requisição. O sintoma é <code>IllegalStateException: Committed</code> no <code>sendRedirect</code>, mesmo com o código certo (a operação até chega a gravar no banco). Rodar por uma configuração de Run/Debug da IDE, ou aumentar o intervalo de scan, resolve.</p>
+            </div>
+
+            <h3>Tomcat (deploy manual)</h3>
+            <div class="bloco"><div class="arq"><span>terminal</span><button type="button" class="copiar">copiar</button></div><pre><code>mvn clean package
+cp target/cadastro-funcionarios.war /caminho/do/tomcat/webapps/
+/caminho/do/tomcat/bin/startup.sh
+# http://localhost:8080/cadastro-funcionarios/funcionarios
+/caminho/do/tomcat/bin/shutdown.sh</code></pre></div>
+            <ul>
+                <li>O <code>.war</code> é o pacote fechado com classes, JSPs e <code>web.xml</code>. O Tomcat o descompacta sozinho em <code>webapps/</code>.</li>
+                <li>No Tomcat o contexto vem do nome do arquivo (<code>funcionarios-v2.war</code> viria a ser <code>/funcionarios-v2</code>). No plugin do Jetty ele é definido no <code>pom.xml</code>.</li>
+                <li><code>mvn package</code> também roda os testes, e o build para se algum falhar.</li>
+                <li>Prefira o zip ou tar.gz do Tomcat ao instalador do Windows, que instala como serviço e esconde esses passos.</li>
+            </ul>
+        </section>
+
+        <section id="erros">
+            <h2>Erros que já apareceram</h2>
+            <table>
+                <tr><th>Sintoma</th><th>Causa</th><th>Solução</th></tr>
+                <tr><td><code>Authentication failed</code> no <code>git push</code></td><td>GitHub não aceita senha pela linha de comando</td><td>Configurar SSH</td></tr>
+                <tr><td><code>MappingNotFoundException</code></td><td>Pasta <code>br.com.pacote.model</code> com pontos no nome, em vez de pastas aninhadas</td><td>Recriar com barras em <code>resources</code></td></tr>
+                <tr><td>Tabela criada no banco ou schema errado</td><td>URL JDBC apontando para outro banco</td><td>URL no banco certo e <code>hibernate.default_schema</code></td></tr>
+                <tr><td><code>database "x" does not exist</code> (3D000)</td><td>O nome na URL não é um banco, mesmo que seja um schema</td><td>Usar o nome do banco na URL</td></tr>
+                <tr><td>Arquivo some de <code>target/classes</code></td><td><code>resources</code> não marcado como Resources Root, ou falta rebuild</td><td>Marcar a pasta e usar Rebuild Project</td></tr>
+                <tr><td><code>UnnecessaryStubbingException</code></td><td>O mock não chegou ao Service (campo <code>final</code> já inicializado)</td><td>Injeção de dependência por construtor</td></tr>
+                <tr><td><code>mvn test</code> mostra "Tests run: 0"</td><td>Surefire antigo, sem suporte a JUnit 5</td><td>Fixar <code>maven-surefire-plugin</code> 3.x</td></tr>
+                <tr><td><code>${...}</code> aparece literal na página</td><td><code>web.xml</code> declarando Servlet 2.3</td><td>Declarar Servlet 4.0 (XSD)</td></tr>
+                <tr><td><code>JSP file [...] not found</code></td><td>Erro de digitação no nome da pasta ou do arquivo (<code>viwes</code>), ou caminho sem <code>/</code> inicial</td><td>Conferir o caminho no <code>getRequestDispatcher</code></td></tr>
+                <tr><td>Tabela vazia, sem erro</td><td>Nome em <code>${chave}</code> diferente do usado em <code>setAttribute</code></td><td>Igualar os nomes</td></tr>
+                <tr><td>Mensagem de sucesso repetida em cada linha</td><td><code>c:if</code> colocado dentro do <code>c:forEach</code></td><td>Mover para antes da tabela</td></tr>
+                <tr><td>CSS não carrega</td><td>Arquivo em <code>resources</code> em vez de <code>webapp/css</code></td><td>Mover para <code>src/main/webapp/css</code></td></tr>
+                <tr><td><code>IllegalStateException: Committed</code></td><td>Hot reload do Jetty durante a requisição</td><td>Rodar pela IDE ou aumentar o scan</td></tr>
+                <tr><td>Erro 500 em vez de mensagem amigável</td><td><code>parseLong</code> ou <code>parseInt</code> fora do <code>try</code></td><td>Mover para dentro do <code>try</code></td></tr>
+                <tr><td><code>AbstractMethodError</code> ao subir um Filter</td><td><code>init</code> e <code>destroy</code> não implementados (abstratos na API 3.1 do Jetty 9.4)</td><td>Implementar os dois, mesmo vazios</td></tr>
+                <tr><td>Acentos quebrados ("JosÃ©")</td><td>Corpo do POST lido como ISO-8859-1</td><td><code>EncodingFilter</code> como primeiro filtro</td></tr>
+                <tr><td>Página vazia depois de excluir o último item da última página</td><td>Número da página maior que o total</td><td>Ajustar a página no Service</td></tr>
+            </table>
+        </section>
+
+        <section id="links">
+            <h2>Links</h2>
+
+            <h3>Hibernate, banco e Maven</h3>
+            <ul>
+                <li><a href="https://docs.jboss.org/hibernate/orm/5.6/userguide/html_single/Hibernate_User_Guide.html">Hibernate 5.6 User Guide</a></li>
+                <li><a href="https://www.postgresql.org/docs/current/ddl-schemas.html">PostgreSQL: Schemas</a></li>
+                <li><a href="https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html">Maven: dependency mechanism e escopos</a></li>
+                <li><a href="https://maven.apache.org/guides/introduction/introduction-to-the-standard-directory-layout.html">Maven: standard directory layout</a></li>
+            </ul>
+
+            <h3>Web</h3>
+            <ul>
+                <li><a href="https://docs.oracle.com/javaee/7/tutorial/servlets.htm">Java EE 7: Servlets</a></li>
+                <li><a href="https://docs.oracle.com/javaee/7/api/javax/servlet/Filter.html">Javadoc de Filter</a></li>
+                <li><a href="https://docs.oracle.com/javaee/5/tutorial/doc/bnakh.html">JSTL: core tag library</a></li>
+                <li><a href="https://en.wikipedia.org/wiki/Post/Redirect/Get">Padrão Post/Redirect/Get</a></li>
+                <li><a href="https://developer.mozilla.org/pt-BR/docs/Learn/Forms/Form_validation">MDN: validação de formulários</a></li>
+                <li><a href="https://tomcat.apache.org/tomcat-9.0-doc/index.html">Tomcat 9</a> e <a href="https://tomcat.apache.org/tomcat-9.0-doc/deployer-howto.html">guia de deploy</a></li>
+                <li><a href="https://jetty.org/docs/jetty/12/programming-guide/maven-jetty/jetty-maven-plugin.html">Jetty Maven Plugin</a></li>
+            </ul>
+
+            <h3>Testes, logs e design</h3>
+            <ul>
+                <li><a href="https://junit.org/junit5/docs/current/user-guide/">JUnit 5 User Guide</a></li>
+                <li><a href="https://site.mockito.org/">Mockito</a></li>
+                <li><a href="https://logback.qos.ch/manual/configuration.html">Logback: configuração</a></li>
+                <li><a href="https://martinfowler.com/articles/injection.html">Fowler: Dependency Injection</a></li>
+                <li><a href="https://martinfowler.com/eaaCatalog/serviceLayer.html">Fowler: Service Layer</a></li>
+                <li><a href="https://martinfowler.com/eaaCatalog/frontController.html">Fowler: Front Controller</a></li>
+            </ul>
+
+            <h3>Git</h3>
+            <ul>
+                <li><a href="https://nvie.com/posts/a-successful-git-branching-model/">A successful Git branching model</a></li>
+                <li><a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits</a></li>
+            </ul>
+        </section>
+
+        <footer>Anotações do projeto cadastro-funcionarios.</footer>
+    </main>
+</div>
+
+<script>
+    document.querySelectorAll('.bloco').forEach(function (bloco) {
+      var botao = bloco.querySelector('.copiar');
+      botao.addEventListener('click', function () {
+        var texto = bloco.querySelector('pre').innerText;
+        function ok() {
+          botao.textContent = 'copiado';
+          setTimeout(function () { botao.textContent = 'copiar'; }, 1200);
+        }
+        function alternativa() {
+          var area = document.createElement('textarea');
+          area.value = texto;
+          document.body.appendChild(area);
+          area.select();
+          try { document.execCommand('copy'); ok(); } catch (e) {}
+          document.body.removeChild(area);
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(texto).then(ok, alternativa);
+        } else {
+          alternativa();
+        }
+      });
+    });
+
+    var busca = document.getElementById('busca');
+    busca.addEventListener('input', function () {
+      var q = busca.value.trim().toLowerCase();
+      document.querySelectorAll('main section').forEach(function (s) {
+        var mostra = !q || s.textContent.toLowerCase().indexOf(q) !== -1;
+        s.hidden = !mostra;
+        var link = document.querySelector('nav a[href="#' + s.id + '"]');
+        if (link) { link.parentElement.hidden = !mostra; }
+      });
+    });
+</script>
+</body>
+</html>
