@@ -25,7 +25,7 @@ public class EditarFuncionarioServlet extends HttpServlet {
 
             request.setAttribute("funcionario", funcionario);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/editar.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/formulario.jsp");
             dispatcher.forward(request, response);
         }catch (IllegalArgumentException e){
             response.sendRedirect(request.getContextPath() + "/funcionarios");
@@ -63,7 +63,7 @@ public class EditarFuncionarioServlet extends HttpServlet {
         request.setAttribute("funcionario", dadosNovos);
         request.setAttribute("erro", mensagemErro);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/editar.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/formulario.jsp");
         dispatcher.forward(request, response);
 
     }
