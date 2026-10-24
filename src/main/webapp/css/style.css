@@ -59,3 +59,15 @@ input:invalid:not(:placeholder-shown),
 input:invalid:focus {
     border-color: #dc2626;
 }
+
+.paginacao { margin: 16px 0; }
+.paginacao a, .paginacao .atual {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-right: 4px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+}
+.paginacao .atual { background: #2563eb; color: white; border-color: #2563eb; }
+.resumo { color: #666; font-size: 14px; }

@@ -3,6 +3,7 @@ package br.com.tiagoribeiro.service;
 import br.com.tiagoribeiro.dao.FuncionarioDAO;
 import br.com.tiagoribeiro.dao.FuncionarioDAOImpl;
 import br.com.tiagoribeiro.model.Funcionario;
+import br.com.tiagoribeiro.util.Pagina;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,7 +76,26 @@ public class FuncionarioService {
         }
     }
 
+    public Pagina<Funcionario> listarPaginado(int pagina, int tamanho) {
+        if (tamanho < 1) {
+            throw new IllegalArgumentException("Tamanho da pagina deve ser maior que zero");
+        }
+        long total = dao.contar();
+        int totalPaginas = (int) Math.ceil((double) total / tamanho);
 
+        if (pagina < 1) {
+            pagina = 1;
+        }
+        if (totalPaginas > 0 && pagina > totalPaginas) {
+            pagina = totalPaginas;
+        }
+        int primeiroRegistro = (pagina - 1) * tamanho;
+        List<Funcionario> itens = dao.listarPaginado(primeiroRegistro, tamanho);
+
+        logger.info("Listando pagina {} de {} (tamanho {})", pagina, totalPaginas, tamanho);
+        return new Pagina<>(itens, pagina, tamanho, total);
+
+    }
 
 
 }

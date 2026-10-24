@@ -69,3 +69,151 @@
 2026-10-24 16:35:14 [qtp1305669460-22] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: 
 2026-10-24 16:35:14 [qtp1305669460-22] WARN  b.c.t.service.FuncionarioService - Validação falhou: nome vazio
 2026-10-24 16:35:15 [qtp1305669460-22] INFO  b.c.t.filter.RequestLoggingFilter - POST /cadastro-funcionarios/funcionarios/novo -> 200 (810 ms)
+2026-10-24 17:22:02 [main] INFO  b.c.t.service.FuncionarioService - Listando pagina 2 de 3 (tamanho 5)
+2026-10-24 17:25:46 [main] INFO  b.c.t.service.FuncionarioService - Listando pagina 3 de 3 (tamanho 5)
+2026-10-24 17:30:14 [main] INFO  b.c.t.service.FuncionarioService - Listando pagina 1 de 3 (tamanho 5)
+2026-10-24 17:30:29 [main] INFO  b.c.t.service.FuncionarioService - Listando pagina 3 de 3 (tamanho 5)
+2026-10-24 17:32:07 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 1
+2026-10-24 17:32:07 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-10-24 17:32:07 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-10-24 17:32:08 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-10-24 17:32:08 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/javadb]
+2026-10-24 17:32:08 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=tfpr, password=****}
+2026-10-24 17:32:08 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-10-24 17:32:08 [main] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2026-10-24 17:32:08 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2026-10-24 17:32:09 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@51d143a1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-10-24 17:32:09 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 25 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 25
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 2
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 26 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 26
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 3
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 27 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 27
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 4
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 28 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 28
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 5
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 29 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 29
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 6
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 30 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 30
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 7
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 31 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 31
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 8
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 32 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 32
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 9
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 33 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 33
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 10
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 34 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 34
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 11
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 35 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 35
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 12
+2026-10-24 17:32:09 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 36 
+2026-10-24 17:32:09 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 36
+2026-10-24 17:33:19 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 1
+2026-10-24 17:33:19 [main] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-10-24 17:33:19 [main] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-10-24 17:33:20 [main] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-10-24 17:33:20 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/javadb]
+2026-10-24 17:33:20 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {user=tfpr, password=****}
+2026-10-24 17:33:20 [main] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-10-24 17:33:20 [main] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2026-10-24 17:33:20 [main] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2026-10-24 17:33:20 [main] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@51d143a1] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-10-24 17:33:20 [main] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 37 
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 37
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 2
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 38 
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 38
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 3
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 39 
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 39
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 4
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 40 
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 40
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 5
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 41 
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 41
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 6
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 42 
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 42
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 7
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 43 
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 43
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 8
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 44 
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 44
+2026-10-24 17:33:20 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 9
+2026-10-24 17:33:20 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 45 
+2026-10-24 17:33:21 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 45
+2026-10-24 17:33:21 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 10
+2026-10-24 17:33:21 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 46 
+2026-10-24 17:33:21 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 46
+2026-10-24 17:33:21 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 11
+2026-10-24 17:33:21 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 47 
+2026-10-24 17:33:21 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 47
+2026-10-24 17:33:21 [main] INFO  b.c.t.service.FuncionarioService - Cadastando funcionrio: Funcionario 12
+2026-10-24 17:33:21 [main] INFO  b.c.t.dao.FuncionarioDAOImpl - Funcionario salvo com sucesso: ID 48 
+2026-10-24 17:33:21 [main] INFO  b.c.t.service.FuncionarioService - Funcionario cadastrado com id: 48
+2026-10-24 17:36:16 [qtp1017215299-23] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 5.6.15.Final
+2026-10-24 17:36:17 [qtp1017215299-23] INFO  o.h.annotations.common.Version - HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2026-10-24 17:36:17 [qtp1017215299-23] WARN  o.hibernate.orm.connections.pooling - HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2026-10-24 17:36:17 [qtp1017215299-23] INFO  o.hibernate.orm.connections.pooling - HHH10001005: using driver [org.postgresql.Driver] at URL [jdbc:postgresql://localhost:5432/javadb]
+2026-10-24 17:36:17 [qtp1017215299-23] INFO  o.hibernate.orm.connections.pooling - HHH10001001: Connection properties: {password=****, user=tfpr}
+2026-10-24 17:36:17 [qtp1017215299-23] INFO  o.hibernate.orm.connections.pooling - HHH10001003: Autocommit mode: false
+2026-10-24 17:36:17 [qtp1017215299-23] INFO  o.h.e.j.c.i.DriverManagerConnectionProviderImpl - HHH000115: Hibernate connection pool size: 20 (min=1)
+2026-10-24 17:36:18 [qtp1017215299-23] INFO  org.hibernate.dialect.Dialect - HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2026-10-24 17:36:18 [qtp1017215299-23] INFO  o.hibernate.orm.connections.access - HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@4712164b] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2026-10-24 17:36:18 [qtp1017215299-23] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2026-10-24 17:36:18 [qtp1017215299-23] INFO  b.c.t.service.FuncionarioService - Listando pagina 1 de 6 (tamanho 5)
+2026-10-24 17:36:19 [qtp1017215299-23] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (2973 ms)
+2026-10-24 17:36:25 [qtp1017215299-17] INFO  b.c.t.service.FuncionarioService - Listando pagina 2 de 6 (tamanho 5)
+2026-10-24 17:36:25 [qtp1017215299-17] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (13 ms)
+2026-10-24 17:36:27 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 3 de 6 (tamanho 5)
+2026-10-24 17:36:27 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (24 ms)
+2026-10-24 17:36:28 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 4 de 6 (tamanho 5)
+2026-10-24 17:36:28 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (25 ms)
+2026-10-24 17:36:31 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 5 de 6 (tamanho 5)
+2026-10-24 17:36:31 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (29 ms)
+2026-10-24 17:36:32 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 6 de 6 (tamanho 5)
+2026-10-24 17:36:32 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (26 ms)
+2026-10-24 17:36:34 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 5 de 6 (tamanho 5)
+2026-10-24 17:36:34 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (17 ms)
+2026-10-24 17:36:35 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 4 de 6 (tamanho 5)
+2026-10-24 17:36:35 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (28 ms)
+2026-10-24 17:36:35 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 3 de 6 (tamanho 5)
+2026-10-24 17:36:35 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (19 ms)
+2026-10-24 17:36:36 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 2 de 6 (tamanho 5)
+2026-10-24 17:36:36 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (18 ms)
+2026-10-24 17:36:36 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 1 de 6 (tamanho 5)
+2026-10-24 17:36:36 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (22 ms)
+2026-10-24 17:36:38 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 2 de 6 (tamanho 5)
+2026-10-24 17:36:38 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (18 ms)
+2026-10-24 17:36:39 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 4 de 6 (tamanho 5)
+2026-10-24 17:36:39 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (22 ms)
+2026-10-24 17:36:40 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 5 de 6 (tamanho 5)
+2026-10-24 17:36:40 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (19 ms)
+2026-10-24 17:36:40 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 6 de 6 (tamanho 5)
+2026-10-24 17:36:40 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (27 ms)
+2026-10-24 17:36:42 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 1 de 6 (tamanho 5)
+2026-10-24 17:36:42 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (34 ms)
+2026-10-24 17:36:43 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 2 de 6 (tamanho 5)
+2026-10-24 17:36:43 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (11 ms)
+2026-10-24 17:36:44 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 3 de 6 (tamanho 5)
+2026-10-24 17:36:44 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (24 ms)
+2026-10-24 17:36:45 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 4 de 6 (tamanho 5)
+2026-10-24 17:36:45 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (8 ms)
+2026-10-24 17:36:45 [qtp1017215299-20] INFO  b.c.t.service.FuncionarioService - Listando pagina 5 de 6 (tamanho 5)
+2026-10-24 17:36:45 [qtp1017215299-20] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (11 ms)
+2026-10-24 17:36:45 [qtp1017215299-18] INFO  b.c.t.service.FuncionarioService - Listando pagina 6 de 6 (tamanho 5)
+2026-10-24 17:36:45 [qtp1017215299-18] INFO  b.c.t.filter.RequestLoggingFilter - GET /cadastro-funcionarios/funcionarios -> 200 (14 ms)

@@ -16,5 +16,9 @@ public interface FuncionarioDAO {
 
     void deletar(Long id);
 
+    List<Funcionario> listarPaginado(int primeiroRegistro, int tamanho);
+
+    long contar();
+
 
 }

@@ -92,4 +92,24 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
     }
 
+    @Override
+    public List<Funcionario> listarPaginado(int primeiroRegistro, int tamanho){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            return session.createQuery("FROM Funcionario f ORDER BY f.id", Funcionario.class)
+                    .setFirstResult(primeiroRegistro)
+                    .setMaxResults(tamanho)
+                    .list();
+        }
+
+    }
+
+    @Override
+    public long contar(){
+        try(Session session = HibernateUtil.getSessionFactory().openSession()){
+            return session.createQuery("SELECT COUNT(f) FROM Funcionario f", Long.class)
+                    .uniqueResult();
+
+        }
+    }
+
 }

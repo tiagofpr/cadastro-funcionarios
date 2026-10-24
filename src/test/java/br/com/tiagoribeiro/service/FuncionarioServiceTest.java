@@ -2,6 +2,7 @@ package br.com.tiagoribeiro.service;
 
 import br.com.tiagoribeiro.dao.FuncionarioDAO;
 import br.com.tiagoribeiro.model.Funcionario;
+import br.com.tiagoribeiro.util.Pagina;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import java.math.BigDecimal;
+import java.util.Collections;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -80,6 +82,39 @@ public class FuncionarioServiceTest {
         assertTrue(exception.getMessage().contains("99"));
     }
 
+    @Test
+    void deveCalcularOffsetCorretoParaSegundaPagina(){
+        when(dao.contar()).thenReturn(12L);
+        when(dao.listarPaginado(5,5)).thenReturn(Collections.emptyList());
 
+        Pagina<Funcionario> resultado = service.listarPaginado(2,5);
+
+        assertEquals(2,resultado.getPaginaAtual());
+        assertEquals(3, resultado.getTotalPaginas());
+        verify(dao).listarPaginado(5,5);
+    }
+
+    @Test
+    void deveAjustarPaginaAcimaDoLimiteParaUltimaPagina(){
+        when(dao.contar()).thenReturn(12L);
+        when(dao.listarPaginado(10,5)).thenReturn(Collections.emptyList());
+
+        Pagina<Funcionario> resultado = service.listarPaginado(999,5);
+
+        assertEquals(3,resultado.getTotalPaginas());
+        assertFalse(resultado.isTemProxima());
+
+    }
+
+    @Test
+    void deveAjustarPaginaZeroOuNegativaParaPrimeira(){
+        when(dao.contar()).thenReturn(12L);
+        when(dao.listarPaginado(0,5)).thenReturn(Collections.emptyList());
+
+        Pagina<Funcionario> resultado = service.listarPaginado(-3,5);
+
+        assertEquals(1, resultado.getPaginaAtual());
+        assertFalse(resultado.isTemAnterior());
+    }
 
 }

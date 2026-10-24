@@ -30,7 +30,7 @@
             <th>Salário</th>
             <th>Ações</th>
         </tr>
-        <c:forEach var="funcionario" items="${funcionarios}">
+        <c:forEach var="funcionario" items="${pagina.itens}">
             <tr>
                 <td>${funcionario.id}</td>
                 <td>${funcionario.nome}</td>
@@ -47,5 +47,31 @@
             </tr>
         </c:forEach>
     </table>
+    <p class="resumo">
+        Mostrando ${pagina.itens.size()} de ${pagina.totalItens} funcionários
+    </p>
+
+    <c:if test="${pagina.totalPaginas > 1}">
+        <nav class="paginacao">
+            <c:if test="${pagina.temAnterior}">
+                <a href="${pageContext.request.contextPath}/funcionarios?pagina=${pagina.paginaAtual - 1}">&laquo; Anterior</a>
+            </c:if>
+
+            <c:forEach begin="1" end="${pagina.totalPaginas}" var="p">
+                <c:choose>
+                    <c:when test="${p == pagina.paginaAtual}">
+                        <strong class="atual">${p}</strong>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="${pageContext.request.contextPath}/funcionarios?pagina=${p}">${p}</a>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:if test="${pagina.temProxima}">
+                <a href="${pageContext.request.contextPath}/funcionarios?pagina=${pagina.paginaAtual + 1}">Próxima &raquo;</a>
+            </c:if>
+        </nav>
+    </c:if>
 </body>
 </html>
